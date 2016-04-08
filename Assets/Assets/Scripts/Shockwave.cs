@@ -8,7 +8,18 @@ public class Shockwave : MonoBehaviour
 
     void Start()
     {
-        //Destroy( GetComponent<SphereCollider>() );
+        Collider[] tHits = Physics.OverlapSphere( transform.position, GetComponent<SphereCollider>().radius * transform.localScale.x );
+
+        for( int i = 0; i < tHits.Length; i++ )
+        {
+            if( tHits[i].tag == "Ball" )
+            {
+                Vector3 tDir = ( tHits[i].transform.position - transform.position ).normalized;
+                tHits[i].GetComponent<Rigidbody>().velocity = new Vector3( tDir.x, 0f, tDir.z ) * _fPower;
+            }
+        }
+
+        Destroy( GetComponent<SphereCollider>() );
     }
 
 	void Update()
@@ -18,13 +29,4 @@ public class Shockwave : MonoBehaviour
             Destroy( gameObject );
         }
 	}
-
-    void OnTriggerEnter( Collider tCollider )
-    {
-        if( tCollider.tag == "Ball" )
-        {
-            Vector3 tDir = ( tCollider.transform.position - transform.position ).normalized;
-            tCollider.GetComponent<Rigidbody>().velocity = new Vector3( tDir.x, 0f, tDir.z ) * _fPower;
-        }
-    }
 }

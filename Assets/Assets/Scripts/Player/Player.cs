@@ -30,8 +30,8 @@ public class Player
     private const float SHOCKWAVE_RADIUS_INC = 0.05f;
     private const float SHOCKWAVE_POWER_INC = 0.1f;
 
-    private const float SHOCKWAVE_MAX_RADIUS = 5f;
-    private const float SHOCKWAVE_MAX_POWER = 25f;
+    private const float SHOCKWAVE_MAX_RADIUS = 10f;
+    private const float SHOCKWAVE_MAX_POWER = 30f;
 
     public Player( int iId )
     {
