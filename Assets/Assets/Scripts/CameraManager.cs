@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class CameraManager : MonoBehaviour
 {
@@ -37,10 +38,13 @@ public class CameraManager : MonoBehaviour
         int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
         int iCurrentPad = ( GameSettings._iNbGamepad == 1 ) ? 0 : iCurrentPlayer;
 
+        GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
+        //GamePadState tPrevState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tPrevState;
+
         if (PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.Play)
         {
-            float fMoveX = Joystick.GetAxis("LeftX", iCurrentPad);
-            float fMoveY = Joystick.GetAxis("LeftY", iCurrentPad);
+            float fMoveX = Joystick.GetAxis( XInputKey.LStickX, tState );
+            float fMoveY = Joystick.GetAxis( XInputKey.LStickY, tState );
 
             Vector3 right = transform.right;
             right.y = 0.0f;
@@ -52,9 +56,9 @@ public class CameraManager : MonoBehaviour
             _tTarget.Translate((right * fMoveX + forward * fMoveY).normalized * _fMoveSpeed * Time.deltaTime, Space.World);
         }
 
-        float fTurnX = Joystick.GetAxis("RightX", iCurrentPad) * _fAzimuthSpeed * Time.deltaTime;
-        float fTurnY = Joystick.GetAxis("RightY", iCurrentPad) * _fPolarSpeed * Time.deltaTime;
-        float fZoom = (Joystick.GetAxis("RT", iCurrentPad) - Joystick.GetAxis("LT", iCurrentPad)) * _fRadialSpeed * Time.deltaTime;
+        float fTurnX = Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime;
+        float fTurnY = Joystick.GetAxis( XInputKey.RStickY, tState ) * _fPolarSpeed * Time.deltaTime;
+        float fZoom = ( Joystick.GetAxis( XInputKey.RT, tState ) - Joystick.GetAxis( XInputKey.LT, tState ) ) * _fRadialSpeed * Time.deltaTime;
 
         _fAzimuthAngle += fTurnX;
         _fPolarAngle += fTurnY;

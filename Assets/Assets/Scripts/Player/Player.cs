@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 
 public enum PlayerState
@@ -15,6 +16,11 @@ public class Player
 {
 	public int _iID;
     public int _iScore;
+
+    // XInput stuff
+    private PlayerIndex _ePlayerIndex;
+    public GamePadState _tState;
+    public GamePadState _tPrevState;
 
     private float _fShockwaveRadius;
     private float _fShockwavePower;
@@ -36,13 +42,41 @@ public class Player
     {
         _iID = iId;
         _iScore = 0;
+
+        switch( _iID + 1 )
+        {
+            case 1:
+                _ePlayerIndex = PlayerIndex.One;
+                break;
+            case 2:
+                _ePlayerIndex = PlayerIndex.Two;
+                break;
+            case 3:
+                _ePlayerIndex = PlayerIndex.Three;
+                break;
+            case 4:
+                _ePlayerIndex = PlayerIndex.Four;
+                break;
+        }
     }
+
 
     public bool Update()
     {
+        GamePadState tState = GamePad.GetState( _ePlayerIndex );
+        if( tState.IsConnected )
+        {
+            _tPrevState = _tState;
+            _tState = tState;
+        }
+        else
+        {
+            Debug.LogError( "Pad " + _ePlayerIndex.ToString() + " not connected !" );
+        }
+
         if( _eState == PlayerState.Play )
         {        
-            if( Joystick.GetButtonDown( "A", ( GameSettings._iNbGamepad == 1 ) ? 0 : _iID ) )
+            if( Joystick.GetButtonDown( XInputKey.A, _tState, _tPrevState ) )
             {
                 _eState = PlayerState.ChargeShockwave;
                 _fShockwavePower = 1f;
@@ -66,7 +100,7 @@ public class Player
             Color tColor = _tShockwaveMaterial.GetColor( "_Color" );
             _tShockwaveMaterial.SetColor( "_Color", new Color( tColor.r, tColor.g, tColor.b, _fShockwavePower / SHOCKWAVE_MAX_POWER / 2f ) );
 
-            if( Joystick.GetButtonUp( "A", ( GameSettings._iNbGamepad == 1 ) ? 0 : _iID ) )
+            if( Joystick.GetButtonUp( XInputKey.A, _tState, _tPrevState ) )
             {
                 GameObject.Destroy( _tShockwavePreview );
                 ShockwaveFactory.Instance.CreateShockwave( _fShockwavePower, _fShockwaveRadius );
