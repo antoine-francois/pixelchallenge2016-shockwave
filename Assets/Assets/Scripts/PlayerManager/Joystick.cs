@@ -31,26 +31,26 @@ public class Joystick
 
     public static float GetAxis(string name, int id)
     {
-        return Input.GetAxis(_tName2Key[name] + id + 1);
+        return Input.GetAxis(_tName2Key[name] + ( id + 1 ) );
     }
 
     public static float GetAxisRaw(string name, int id)
     {
-        return Input.GetAxisRaw(_tName2Key[name] + id + 1);
+        return Input.GetAxisRaw(_tName2Key[name] + ( id + 1 ) );
     }
 
     public static bool GetButtonDown(string name, int id)
     {
-        return Input.GetButtonDown(_tName2Key[name] + id + 1);
+        return Input.GetButtonDown(_tName2Key[name] + ( id + 1 ) );
     }
 
     public static bool GetButton(string name, int id)
     {
-        return Input.GetButton(_tName2Key[name] + id + 1);
+        return Input.GetButton(_tName2Key[name] + ( id + 1 ) );
     }
 
     public static bool GetButtonUp(string name, int id)
     {
-        return Input.GetButtonUp(_tName2Key[name] + id + 1);
+        return Input.GetButtonUp(_tName2Key[name] + ( id + 1 ) );
     }
 }

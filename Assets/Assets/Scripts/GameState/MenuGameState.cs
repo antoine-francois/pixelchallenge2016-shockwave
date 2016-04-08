@@ -12,6 +12,7 @@ public class MenuGameState : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        Joystick.Init();
     }
 
 	void Start ()

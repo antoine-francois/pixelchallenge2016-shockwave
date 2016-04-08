@@ -21,8 +21,6 @@ public class PhysicUpdateTest : MonoBehaviour
             RaycastHit tHit;
             if( Physics.Raycast( tMousePos, Vector3.down, out tHit ) )
             {
-                Debug.Log( tMousePos );
-
                 GameObject tWave = Instantiate( _tShockwavePrefab );
                 tWave.transform.localPosition = new Vector3( tMousePos.x, 0f, tMousePos.z );
 
