@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Button
-  m_Shader: {fileID: 4800000, guid: d5a394f3eeb0fbb4f9d30ade4b0d63d2, type: 3}
+  m_Name: Shader
+  m_Shader: {fileID: 4800000, guid: be0a9796a3056e240b22f48b9cd7730d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 42db5317fc859c143980b8beadb46a7d, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -80,23 +80,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _NormalTex
+          name: _Dirt
         second:
-          m_Texture: {fileID: 2800000, guid: ba516df69d5a33c4185a9ef2ab5b3299, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _M_S_AOTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 2857d09867c45af4fa78cdc16e391153, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Emissive
-        second:
-          m_Texture: {fileID: 2800000, guid: cadf84a3a1a0e994d89743b71b01d360, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -150,8 +136,20 @@ Material:
         second: 0
       data:
         first:
-          name: _EmissivePower
-        second: 3
+          name: _Length
+        second: 1
+      data:
+        first:
+          name: _Y
+        second: 1
+      data:
+        first:
+          name: _MudHeight1
+        second: 1
+      data:
+        first:
+          name: _MudHeight2
+        second: 1
     m_Colors:
       data:
         first:
@@ -163,5 +161,13 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _EmissiveColor
-        second: {r: 1, g: 0.6, b: 0, a: 1}
+          name: _MudColor1
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _MudColor2
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      data:
+        first:
+          name: _MudColor3
+        second: {r: 0, g: 0, b: 0, a: 1}

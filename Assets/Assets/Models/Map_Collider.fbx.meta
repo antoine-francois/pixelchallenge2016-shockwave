@@ -1,25 +1,15 @@
 fileFormatVersion: 2
-guid: 539471e9e20655b4dbac45c374a424db
-timeCreated: 1460142199
+guid: bf65ffc0f06996348adcfb6c5e3c9627
+timeCreated: 1460161748
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: polySurface64
-    100004: polySurface65
     400000: //RootNode
-    400002: polySurface64
-    400004: polySurface65
     2300000: //RootNode
-    2300002: polySurface64
-    2300004: polySurface65
     3300000: //RootNode
-    3300002: polySurface64
-    3300004: polySurface65
-    4300000: Map
-    4300002: polySurface64
-    4300004: polySurface65
+    4300000: Map_Collider
   materials:
     importMaterials: 0
     materialName: 0
@@ -49,7 +39,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
