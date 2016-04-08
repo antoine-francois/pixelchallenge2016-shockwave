@@ -1,32 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class ForceField : GenericMechanism
 {
+    private Collider _tCollider;
+    private MeshRenderer _tRenderer;
 
-	// Use this for initialization
+    public List<Color> _tForceFieldColor = new List<Color>();
+
 	public override void Start()
     {
         base.Start();
-	}
-	
-	// Update is called once per frame
-	void Update()
-    {
-	
-	}
+        _tCollider = GetComponent<CapsuleCollider>();
+        _tRenderer = GetComponent<MeshRenderer>();
+
+        Disable();
+    }
 
     public override void Activate( Ball tBall )
     {
         base.Activate( tBall );
 
-        GetComponentInChildren<MeshRenderer>().materials[0].color = Color.red;
+        _tCollider.enabled = true;
+        _tRenderer.enabled = true;
+
+        gameObject.layer = LayerMask.NameToLayer( "P" + ( tBall._iPlayer + 1 ) );
+        GetComponentInChildren<MeshRenderer>().materials[0].color = _tForceFieldColor[tBall._iPlayer];
     }
 
     public override void Disable()
     {
         base.Disable();
 
-        GetComponentInChildren<MeshRenderer>().materials[0].color = Color.white;
+        _tCollider.enabled = false;
+        _tRenderer.enabled = false;
     }
 }

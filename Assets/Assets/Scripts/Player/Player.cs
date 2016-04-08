@@ -64,8 +64,15 @@ public class Player
     public bool Update()
     {
         GamePadState tState = GamePad.GetState( _ePlayerIndex );
+
         if( tState.IsConnected )
         {
+            _tPrevState = _tState;
+            _tState = tState;
+        }
+        else if( GameSettings._iNbGamepad == 1 )
+        {
+            tState = GamePad.GetState( PlayerIndex.One );
             _tPrevState = _tState;
             _tState = tState;
         }
