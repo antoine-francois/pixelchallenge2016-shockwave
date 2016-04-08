@@ -42,7 +42,7 @@ public class Player
     {
         if( _eState == PlayerState.Play )
         {        
-            if( Joystick.GetButtonDown( "A", 0 ) )
+            if( Joystick.GetButtonDown( "A", ( GameSettings._iNbGamepad == 1 ) ? 0 : _iID ) )
             {
                 _eState = PlayerState.ChargeShockwave;
                 _fShockwavePower = 1f;
@@ -66,7 +66,7 @@ public class Player
             Color tColor = _tShockwaveMaterial.GetColor( "_Color" );
             _tShockwaveMaterial.SetColor( "_Color", new Color( tColor.r, tColor.g, tColor.b, _fShockwavePower / SHOCKWAVE_MAX_POWER / 2f ) );
 
-            if( Joystick.GetButtonUp( "A", 0 ) )
+            if( Joystick.GetButtonUp( "A", ( GameSettings._iNbGamepad == 1 ) ? 0 : _iID ) )
             {
                 GameObject.Destroy( _tShockwavePreview );
                 ShockwaveFactory.Instance.CreateShockwave( _fShockwavePower, _fShockwaveRadius );
