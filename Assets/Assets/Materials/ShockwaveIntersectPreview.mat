@@ -80,6 +80,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Bump
+        second:
+          m_Texture: {fileID: 2800000, guid: fb1de02792360bf46aeb18415dd7e11b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _NormalTex
         second:
           m_Texture: {fileID: 2800000, guid: 7f688cb77ef75b54fa32ec7dde6eda07, type: 3}
@@ -97,13 +104,6 @@ Material:
           name: _Emissive
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Bump
-        second:
-          m_Texture: {fileID: 2800000, guid: fb1de02792360bf46aeb18415dd7e11b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -161,15 +161,15 @@ Material:
         second: 0
       data:
         first:
-          name: _EmissivePower
-        second: 1
-      data:
-        first:
           name: _Depth
         second: 3
       data:
         first:
           name: _Displace
+        second: 1
+      data:
+        first:
+          name: _EmissivePower
         second: 1
       data:
         first:

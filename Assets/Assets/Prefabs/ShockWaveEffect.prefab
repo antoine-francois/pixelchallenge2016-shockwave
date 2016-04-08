@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 484772}
   - 33: {fileID: 3300698}
-  - 135: {fileID: 13599420}
   - 23: {fileID: 2380350}
   m_Layer: 0
   m_Name: Distortion
@@ -27,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 403484}
   - 33: {fileID: 3339482}
-  - 135: {fileID: 13564916}
   - 23: {fileID: 2322462}
   m_Layer: 0
   m_Name: Intersection
@@ -44,6 +42,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 426550}
+  - 135: {fileID: 13522152}
+  - 114: {fileID: 11444038}
   m_Layer: 0
   m_Name: ShockWaveEffect
   m_TagString: Untagged
@@ -155,26 +155,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145358}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &13564916
-SphereCollider:
+--- !u!114 &11444038
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145358}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 152898}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13599420
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa208b50a42d4e14ebf90cfad24aa235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fPower: 1
+--- !u!135 &13522152
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100094}
+  m_GameObject: {fileID: 152898}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
