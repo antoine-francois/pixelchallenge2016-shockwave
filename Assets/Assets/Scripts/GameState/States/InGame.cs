@@ -11,7 +11,13 @@ public class InGame : State
 
     public override State UpdateState()
     {
-        PlayerManager.Instance.Update();
+        if( PlayerManager.Instance.Update() )
+        {
+            // Next Turn
+            PlayerManager.Instance.NextPlayer();
+            MechanismManager.Instance.NextTurn();
+        }
+
         MenuManager.Instance.UpdateHUD();
         return null;
     }

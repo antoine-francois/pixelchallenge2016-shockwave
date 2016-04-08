@@ -36,14 +36,13 @@ public class PlayerManager
         }
     }
 
-    public void Update()
+    public bool Update()
     {
         switch( _tPlayers[_iCurrentPlayer]._eState )
         {
             case PlayerState.Play:
                 _fPlayTimer += Time.deltaTime;
-                if( _fPlayTimer > MAX_TIME )
-                {
+                if( _fPlayTimer > MAX_TIME ) {
                     _tPlayers[_iCurrentPlayer]._eState = PlayerState.Timeout;
                 }
                 break;
@@ -51,9 +50,9 @@ public class PlayerManager
             case PlayerState.Timeout:
                 _fTimer += Time.deltaTime;
                 if( _fTimer > TIME_OUT ) {
-                    NextPlayer();
+                    return true;
                 }
-                return;
+                return false;
 
             case PlayerState.Intro:
                 _fTimer += Time.deltaTime;
@@ -62,16 +61,17 @@ public class PlayerManager
                     _fTimer = 0f;
                     _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
                 }
-                return;
+                return false;
         }
 
         if( _tPlayers[_iCurrentPlayer].Update() )
         {
-            NextPlayer();
+            return true;
         }
+        return false;
     }
 
-    void NextPlayer()
+    public void NextPlayer()
     {
         _fPlayTimer = 0f;
         _fTimer = 0f;
