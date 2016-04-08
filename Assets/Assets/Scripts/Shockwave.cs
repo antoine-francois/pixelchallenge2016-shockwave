@@ -5,7 +5,7 @@ public class Shockwave : MonoBehaviour
 {
     private float _fLifetime = 2f;
 
-    private const float WAVE_FORCE = 5f;
+    private const float WAVE_FORCE = 10f;
 
     void Start()
     {

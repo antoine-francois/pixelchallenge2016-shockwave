@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Ball : MonoBehaviour
 {
+    int _iPlayer = 0;
+
     public Rigidbody _tRigidbody { get; private set; }
 
 	void Start()
