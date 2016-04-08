@@ -18,7 +18,7 @@ public class Player
     public PlayerState _eState = PlayerState.Intro;
 
     private Vector2 _tPlayerPos = new Vector2( 0f, 0f );
-    private const float CAMERA_SPEED = 0.5f;
+    private const float CAMERA_SPEED = 0.25f;
 
     public Player( int iId )
     {
@@ -41,7 +41,6 @@ public class Player
         }
         else if( _eState == PlayerState.Shockwave && !BallManager.Instance.IsBallMoving() )
         {
-            Debug.Log( "Stop moving" );
             return true;
         }
         return false;

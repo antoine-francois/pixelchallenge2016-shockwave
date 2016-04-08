@@ -5,7 +5,7 @@ public class Shockwave : MonoBehaviour
 {
     private float _fLifetime = 2f;
 
-    private const float WAVE_FORCE = 10f;
+    private const float WAVE_FORCE = 20f;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class Shockwave : MonoBehaviour
     {
         if( tCollider.tag == "Ball" )
         {
-            Vector3 tDir = tCollider.transform.position - transform.position;
+            Vector3 tDir = ( tCollider.transform.position - transform.position ).normalized;
             tCollider.GetComponent<Rigidbody>().velocity = new Vector3( tDir.x, 0f, tDir.z ) * WAVE_FORCE;
         }
     }

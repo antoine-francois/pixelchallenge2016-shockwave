@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class PlayerManager
@@ -20,10 +21,12 @@ public class PlayerManager
     public List<Player> _tPlayers = new List<Player>();
     public int _iCurrentPlayer = 0;
 
-    private float _fPlayerTimer = 0f;
-    private const float MAX_TIME = 8f;
-    private const float TIME_OUT = 1.5f;
-    private const float INTRO_TIME = 1.5f;
+    private float _fTimer = 0f;
+    private float _fPlayTimer = 0f;
+
+    public const float MAX_TIME = 8f;
+    public const float TIME_OUT = 1.5f;
+    public const float INTRO_TIME = 1.5f;
 
     private PlayerManager()
     {
@@ -35,29 +38,28 @@ public class PlayerManager
 
     public void Update()
     {
-        _fPlayerTimer += Time.deltaTime;
         switch( _tPlayers[_iCurrentPlayer]._eState )
         {
             case PlayerState.Play:
-                if( _fPlayerTimer > MAX_TIME )
+                _fPlayTimer += Time.deltaTime;
+                if( _fPlayTimer > MAX_TIME )
                 {
                     _tPlayers[_iCurrentPlayer]._eState = PlayerState.Timeout;
-                    _fPlayerTimer = 0f;
                 }
                 break;
 
             case PlayerState.Timeout:
-                if( _fPlayerTimer > TIME_OUT )
-                {
-                    _fPlayerTimer = 0f;
+                _fTimer += Time.deltaTime;
+                if( _fTimer > TIME_OUT ) {
                     NextPlayer();
                 }
                 return;
 
             case PlayerState.Intro:
-                if( _fPlayerTimer > INTRO_TIME )
+                _fTimer += Time.deltaTime;
+                if( _fTimer > INTRO_TIME )
                 {
-                    _fPlayerTimer = 0f;
+                    _fTimer = 0f;
                     _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
                 }
                 return;
@@ -71,7 +73,8 @@ public class PlayerManager
 
     void NextPlayer()
     {
-        _fPlayerTimer = 0f;
+        _fPlayTimer = 0f;
+        _fTimer = 0f;
         _iCurrentPlayer++;
 
         if( _iCurrentPlayer == GameSettings._iNbPlayers ) {
@@ -79,5 +82,11 @@ public class PlayerManager
         }
 
         _tPlayers[_iCurrentPlayer]._eState = PlayerState.Intro;
+    }
+
+    public string GetChrono()
+    {
+        TimeSpan tTime = TimeSpan.FromSeconds( MAX_TIME - _fPlayTimer );
+        return string.Format("{0:00}:{1:00}.{2:000}", tTime.Minutes, tTime.Seconds, tTime.Milliseconds);
     }
 }

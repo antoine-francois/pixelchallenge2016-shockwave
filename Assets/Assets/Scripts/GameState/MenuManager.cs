@@ -15,9 +15,9 @@ public class MenuManager : MonoBehaviour
 
     [Header("HUD")]
     public List<Text> _tScoreList;
-    public Text _tCurrentPlayer;
+    public Text _tTimer;
     public Text _tTimeOut;
-    public Text _tCurrentPlayerIntro;
+    public Text _tCurrentPlayer;
 
     [Header("Menus Root")]
     public GameObject _tSplashRoot;
@@ -38,26 +38,25 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if( Input.GetKeyDown( KeyCode.Escape ) )
-        {
+        if( Input.GetKeyDown( KeyCode.Escape ) ) {
             Back();
         }
     }
 
     public void UpdateHUD()
     {
+        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
+        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
         for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
             _tScoreList[i].text =  string.Format( "P{0}\n{1}", i + 1, PlayerManager.Instance._tPlayers[i]._iScore );
         }
 
-        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
-        _tCurrentPlayer.text = "Current Player : " + ( iCurrentPlayer + 1 );
+        _tTimer.text = PlayerManager.Instance.GetChrono();
 
-        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
         _tTimeOut.gameObject.SetActive( eState == PlayerState.Timeout );
 
-        _tCurrentPlayerIntro.gameObject.SetActive( eState == PlayerState.Intro );
-        _tCurrentPlayerIntro.text = "Player " + ( iCurrentPlayer + 1 );
+        _tCurrentPlayer.gameObject.SetActive( eState == PlayerState.Intro );
+        _tCurrentPlayer.text = "Player " + ( iCurrentPlayer + 1 );
     }
 
     public void GoToPressStart()
