@@ -64,11 +64,7 @@ public class PlayerManager
                 return false;
         }
 
-        if( _tPlayers[_iCurrentPlayer].Update() )
-        {
-            return true;
-        }
-        return false;
+        return _tPlayers[_iCurrentPlayer].Update();
     }
 
     public void NextPlayer()

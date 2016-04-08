@@ -911,6 +911,7 @@ GameObject:
   - 4: {fileID: 1277665291}
   - 114: {fileID: 1277665290}
   - 114: {fileID: 1277665289}
+  - 114: {fileID: 1277665292}
   m_Layer: 0
   m_Name: GamePlay
   m_TagString: Untagged
@@ -956,6 +957,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1277665292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1277665288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5183a01774b0c7a408e05b03541f9079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tMechaList: []
 --- !u!1 &1513632807
 GameObject:
   m_ObjectHideFlags: 0
