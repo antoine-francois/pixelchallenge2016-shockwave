@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     public GameObject _tPauseRoot;
     public GameObject _tLoadingRoot;
 
-    delegate void BackCallback();
+    public delegate void BackCallback();
     BackCallback _PreviousMenu = null;
 
     void Update()
@@ -84,6 +84,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
+        StartCoroutine(LoadLevelManager("EmptyScene", GoToMainMenu));
         MenuGameState.Instance._tManager.ChangeState(new MainMenu());
     }
 
@@ -101,9 +102,10 @@ public class MenuManager : MonoBehaviour
     {
         DisableAll();
         MenuGameState.Instance._tManager.ChangeState(new InGame());
+        StartCoroutine(LoadLevelManager(LevelName, GoToHUD));
     }
 
-    public IEnumerator LoadLevelManager(string name)
+    public IEnumerator LoadLevelManager(string name, BackCallback newMenu)
     {
         AsyncOperation loading = SceneManager.LoadSceneAsync(name);
         loading.allowSceneActivation = true;
@@ -125,6 +127,6 @@ public class MenuManager : MonoBehaviour
                 EventSystem.current.firstSelectedGameObject.GetComponent<Selectable>().Select();
         }
 
-        MenuGameState.Instance._tMenuManager.GoToHUD();
+        newMenu();
     }
 }
