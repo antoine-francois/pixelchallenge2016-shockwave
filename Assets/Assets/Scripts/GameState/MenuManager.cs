@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager Instance { get; private set; }
+
     [Header("Spash screens")]
     public Image _tSplash;
     public Image _tSplashFade;
 
     [Header("HUD")]
-    public Text _tScoreP1;
-    public Text _tScoreP2;
-    public Text _tScoreP3;
-    public Text _tScoreP4;
+    public List<Text> _tScoreList;
+    public Text _tTimer;
+    public Text _tTimeOut;
     public Text _tCurrentPlayer;
 
     [Header("Menus Root")]
@@ -29,20 +31,32 @@ public class MenuManager : MonoBehaviour
     public delegate void BackCallback();
     BackCallback _PreviousMenu = null;
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if( Input.GetKeyDown( KeyCode.Escape ) ) {
             Back();
+        }
     }
 
     public void UpdateHUD()
     {
-        _tScoreP1.text = "P1\n" + PlayerDataManager.Instance._tPlayers[0]._iScore;
-        _tScoreP2.text = "P2\n" + PlayerDataManager.Instance._tPlayers[1]._iScore;
-        _tScoreP3.text = "P3\n" + PlayerDataManager.Instance._tPlayers[2]._iScore;
-        _tScoreP4.text = "P4\n" + PlayerDataManager.Instance._tPlayers[3]._iScore;
+        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
+        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
+        for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
+            _tScoreList[i].text =  string.Format( "P{0}\n{1}", i + 1, PlayerManager.Instance._tPlayers[i]._iScore );
+        }
 
-        _tCurrentPlayer.text = "Current Player : " + PlayerDataManager.Instance._iCurrentPlayer;
+        _tTimer.text = PlayerManager.Instance.GetChrono();
+
+        _tTimeOut.gameObject.SetActive( eState == PlayerState.Timeout );
+
+        _tCurrentPlayer.gameObject.SetActive( eState == PlayerState.Intro );
+        _tCurrentPlayer.text = "Player " + ( iCurrentPlayer + 1 );
     }
 
     public void GoToPressStart()

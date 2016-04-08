@@ -15,13 +15,13 @@ public class MenuGameState : MonoBehaviour
         Joystick.Init();
     }
 
-	void Start ()
+	void Start()
     {
         _tManager = new StateManager();
         _tManager.Start(new SplashScreen());
 	}
 	
-	void Update ()
+	void Update()
     {
         _tManager.Update();
 	}
