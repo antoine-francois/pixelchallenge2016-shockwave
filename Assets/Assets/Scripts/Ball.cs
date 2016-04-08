@@ -5,13 +5,9 @@ public class Ball : MonoBehaviour
 {
     public Rigidbody _tRigidbody { get; private set; }
 
-    void Awake()
-    {
-        BallManager.Instance.AddBall( this );
-    }
-
 	void Start()
     {
+        BallManager.Instance.AddBall( this );
         _tRigidbody = GetComponent<Rigidbody>();
 	}
 
