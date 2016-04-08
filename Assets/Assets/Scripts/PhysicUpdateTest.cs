@@ -24,12 +24,11 @@ public class PhysicUpdateTest : MonoBehaviour
                 Debug.Log( tMousePos );
 
                 GameObject tWave = Instantiate( _tShockwavePrefab );
-                //tWave.transform.localScale = new Vector3( 0, 0, 0 );
                 tWave.transform.localPosition = new Vector3( tMousePos.x, 0f, tMousePos.z );
 
-                BallManager.Instance.DoStuffOnEachBalls( new BallActionCallback( c => {
+                /*BallManager.Instance.DoStuffOnEachBalls( new BallActionCallback( c => {
                     c._tRigidbody.WakeUp();
-                } ) );
+                } ) );*/
             }
 
         }
