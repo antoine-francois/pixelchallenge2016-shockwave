@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
     [Header("HUD")]
     public Text _tScoreP1;
     public Text _tScoreP2;
+    public Text _tScoreP3;
+    public Text _tScoreP4;
     public Text _tCurrentPlayer;
 
     [Header("Menus Root")]
@@ -31,6 +33,16 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Back();
+    }
+
+    public void UpdateHUD()
+    {
+        _tScoreP1.text = "P1\n" + PlayerDataManager.Instance._tPlayers[0]._iScore;
+        _tScoreP2.text = "P2\n" + PlayerDataManager.Instance._tPlayers[1]._iScore;
+        _tScoreP3.text = "P3\n" + PlayerDataManager.Instance._tPlayers[2]._iScore;
+        _tScoreP4.text = "P4\n" + PlayerDataManager.Instance._tPlayers[3]._iScore;
+
+        _tCurrentPlayer.text = "Current Player : " + PlayerDataManager.Instance._iCurrentPlayer;
     }
 
     public void GoToPressStart()
