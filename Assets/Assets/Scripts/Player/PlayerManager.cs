@@ -35,7 +35,7 @@ public class PlayerManager
     {
         _fPlayerTimer += Time.deltaTime;
 
-        if( _fPlayerTimer > MAX_TIME || _tPlayers[_iCurrentPlayer].Update() )
+        if( ( _fPlayerTimer > MAX_TIME && _tPlayers[_iCurrentPlayer]._eState == PlayerState.Play ) || _tPlayers[_iCurrentPlayer].Update() )
         {
             _fPlayerTimer = 0f;
             _iCurrentPlayer++;
@@ -43,6 +43,8 @@ public class PlayerManager
             if( _iCurrentPlayer == GameSettings._iNbPlayers ) {
                 _iCurrentPlayer = 0;
             }
+
+            _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
             Debug.Log( "Player: " + _iCurrentPlayer );
         }
     }

@@ -10,6 +10,8 @@ public class BallManager : MonoBehaviour
 
     private List<Ball> _tBallList = new List<Ball>();
 
+    private const float MIN_VELOCITY_SQR = 0.01f;
+
     void Awake()
     {
         Instance = this;
@@ -33,5 +35,17 @@ public class BallManager : MonoBehaviour
         {
             tDelegate( _tBallList[i] );
         }
+    }
+
+    public bool IsBallMoving()
+    {
+        for( int i = 0; i < _tBallList.Count; i++ )
+        {
+            if( _tBallList[i]._tRigidbody.velocity.sqrMagnitude > MIN_VELOCITY_SQR ) {
+                return true;
+            }
+            _tBallList[i]._tRigidbody.velocity = Vector3.zero;
+        }
+        return false;
     }
 }
