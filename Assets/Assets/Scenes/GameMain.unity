@@ -1150,6 +1150,7 @@ GameObject:
   - 81: {fileID: 1378421020}
   - 114: {fileID: 1378421026}
   - 114: {fileID: 1378421025}
+  - 114: {fileID: 1378421027}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1248,6 +1249,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tShockwavePrefab: {fileID: 128804, guid: cbd1e8b12a569274c9b03800ab1dafae, type: 2}
+--- !u!114 &1378421027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1378421019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef06b3e45d19ff42916a5e0525229e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1499077987
 GameObject:
   m_ObjectHideFlags: 0

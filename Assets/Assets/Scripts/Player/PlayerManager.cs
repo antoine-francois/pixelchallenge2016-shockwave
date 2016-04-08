@@ -86,7 +86,7 @@ public class PlayerManager
 
     public string GetChrono()
     {
-        TimeSpan tTime = TimeSpan.FromSeconds( MAX_TIME - _fPlayTimer );
-        return string.Format("{0:00}:{1:00}.{2:000}", tTime.Minutes, tTime.Seconds, tTime.Milliseconds);
+        TimeSpan tTime = TimeSpan.FromSeconds( Mathf.Clamp( MAX_TIME - _fPlayTimer, 0f, MAX_TIME ) );
+        return string.Format( "{0:00}:{1:00}.{2:000}", tTime.Minutes, tTime.Seconds, tTime.Milliseconds );
     }
 }
