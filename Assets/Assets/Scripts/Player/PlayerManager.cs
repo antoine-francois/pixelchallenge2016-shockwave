@@ -22,6 +22,8 @@ public class PlayerManager
 
     private float _fPlayerTimer = 0f;
     private const float MAX_TIME = 8f;
+    private const float TIME_OUT = 1.5f;
+    private const float INTRO_TIME = 1.5f;
 
     private PlayerManager()
     {
@@ -34,18 +36,48 @@ public class PlayerManager
     public void Update()
     {
         _fPlayerTimer += Time.deltaTime;
-
-        if( ( _fPlayerTimer > MAX_TIME && _tPlayers[_iCurrentPlayer]._eState == PlayerState.Play ) || _tPlayers[_iCurrentPlayer].Update() )
+        switch( _tPlayers[_iCurrentPlayer]._eState )
         {
-            _fPlayerTimer = 0f;
-            _iCurrentPlayer++;
+            case PlayerState.Play:
+                if( _fPlayerTimer > MAX_TIME )
+                {
+                    _tPlayers[_iCurrentPlayer]._eState = PlayerState.Timeout;
+                    _fPlayerTimer = 0f;
+                }
+                break;
 
-            if( _iCurrentPlayer == GameSettings._iNbPlayers ) {
-                _iCurrentPlayer = 0;
-            }
+            case PlayerState.Timeout:
+                if( _fPlayerTimer > TIME_OUT )
+                {
+                    _fPlayerTimer = 0f;
+                    NextPlayer();
+                }
+                return;
 
-            _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
-            Debug.Log( "Player: " + _iCurrentPlayer );
+            case PlayerState.Intro:
+                if( _fPlayerTimer > INTRO_TIME )
+                {
+                    _fPlayerTimer = 0f;
+                    _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
+                }
+                return;
         }
+
+        if( _tPlayers[_iCurrentPlayer].Update() )
+        {
+            NextPlayer();
+        }
+    }
+
+    void NextPlayer()
+    {
+        _fPlayerTimer = 0f;
+        _iCurrentPlayer++;
+
+        if( _iCurrentPlayer == GameSettings._iNbPlayers ) {
+            _iCurrentPlayer = 0;
+        }
+
+        _tPlayers[_iCurrentPlayer]._eState = PlayerState.Intro;
     }
 }

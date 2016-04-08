@@ -4,8 +4,10 @@ using System.Collections;
 
 public enum PlayerState
 {
+    Intro,
     Play,
-    Shockwave
+    Shockwave,
+    Timeout
 }
 
 public class Player
@@ -13,7 +15,7 @@ public class Player
 	public int _iID;
     public int _iScore;
 
-    public PlayerState _eState;
+    public PlayerState _eState = PlayerState.Intro;
 
     private Vector2 _tPlayerPos = new Vector2( 0f, 0f );
     private const float CAMERA_SPEED = 0.5f;
@@ -37,7 +39,7 @@ public class Player
                 _eState = PlayerState.Shockwave;
             }
         }
-        else if( !BallManager.Instance.IsBallMoving() )
+        else if( _eState == PlayerState.Shockwave && !BallManager.Instance.IsBallMoving() )
         {
             Debug.Log( "Stop moving" );
             return true;

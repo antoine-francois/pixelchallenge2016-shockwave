@@ -39,13 +39,18 @@ public class BallManager : MonoBehaviour
 
     public bool IsBallMoving()
     {
+        bool bMove = false;
         for( int i = 0; i < _tBallList.Count; i++ )
         {
             if( _tBallList[i]._tRigidbody.velocity.sqrMagnitude > MIN_VELOCITY_SQR ) {
-                return true;
+                bMove = true;
             }
-            _tBallList[i]._tRigidbody.velocity = Vector3.zero;
+            else
+            {
+                _tBallList[i]._tRigidbody.velocity = Vector3.zero;
+                _tBallList[i]._tRigidbody.angularVelocity = Vector3.zero;
+            }
         }
-        return false;
+        return bMove;
     }
 }
