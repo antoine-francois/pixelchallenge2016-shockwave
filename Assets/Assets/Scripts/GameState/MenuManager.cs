@@ -37,12 +37,12 @@ public class MenuManager : MonoBehaviour
 
     public void UpdateHUD()
     {
-        _tScoreP1.text = "P1\n" + PlayerDataManager.Instance._tPlayers[0]._iScore;
-        _tScoreP2.text = "P2\n" + PlayerDataManager.Instance._tPlayers[1]._iScore;
-        _tScoreP3.text = "P3\n" + PlayerDataManager.Instance._tPlayers[2]._iScore;
-        _tScoreP4.text = "P4\n" + PlayerDataManager.Instance._tPlayers[3]._iScore;
+        _tScoreP1.text = "P1\n" + PlayerManager.Instance._tPlayers[0]._iScore;
+        _tScoreP2.text = "P2\n" + PlayerManager.Instance._tPlayers[1]._iScore;
+        _tScoreP3.text = "P3\n" + PlayerManager.Instance._tPlayers[2]._iScore;
+        _tScoreP4.text = "P4\n" + PlayerManager.Instance._tPlayers[3]._iScore;
 
-        _tCurrentPlayer.text = "Current Player : " + PlayerDataManager.Instance._iCurrentPlayer;
+        _tCurrentPlayer.text = "Current Player : " + PlayerManager.Instance._iCurrentPlayer;
     }
 
     public void GoToPressStart()
