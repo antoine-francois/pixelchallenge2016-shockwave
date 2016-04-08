@@ -6,6 +6,7 @@ public class ShockwaveFactory : MonoBehaviour
     public static ShockwaveFactory Instance {get; private set; }
 
     public GameObject _tShockwavePrefab;
+    public GameObject _tShockwavePreviewPrefab;
 
 
 	void Awake()
@@ -31,5 +32,21 @@ public class ShockwaveFactory : MonoBehaviour
                 c._tRigidbody.WakeUp();
             } ) );*/
         }
+    }
+
+    public GameObject CreateShockwavePreview( float fRadius )
+    {
+        Vector3 tCamPos = Camera.main.transform.position;
+
+        RaycastHit tHit;
+        if( Physics.Raycast( tCamPos, Vector3.down, out tHit ) )
+        {
+            GameObject tWave = Instantiate( _tShockwavePreviewPrefab );
+            tWave.transform.localPosition = new Vector3( tCamPos.x, 0f, tCamPos.z );
+            tWave.transform.localScale = new Vector3( fRadius, fRadius, fRadius );
+
+            return tWave;
+        }
+        return null;
     }
 }

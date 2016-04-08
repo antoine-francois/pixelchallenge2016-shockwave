@@ -1248,7 +1248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db88c0f92f56db4b8d1dd5be4c9d368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tShockwavePrefab: {fileID: 128804, guid: cbd1e8b12a569274c9b03800ab1dafae, type: 2}
+  _tShockwavePrefab: {fileID: 152898, guid: a7f96001ae7a4364188dbd0e8e14b35b, type: 2}
+  _tShockwavePreviewPrefab: {fileID: 182540, guid: cadf619a857b0b44f82dc1261899a2f1,
+    type: 2}
 --- !u!114 &1378421027
 MonoBehaviour:
   m_ObjectHideFlags: 0
