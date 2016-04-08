@@ -1,25 +1,23 @@
 fileFormatVersion: 2
-guid: 539471e9e20655b4dbac45c374a424db
-timeCreated: 1460142199
+guid: 7206129d13eeb2b45884c52bf771237e
+timeCreated: 1460150387
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: polySurface64
-    100004: polySurface65
+    100002: Button__border
+    100004: Button_plate
     400000: //RootNode
-    400002: polySurface64
-    400004: polySurface65
-    2300000: //RootNode
-    2300002: polySurface64
-    2300004: polySurface65
-    3300000: //RootNode
-    3300002: polySurface64
-    3300004: polySurface65
-    4300000: Map
-    4300002: polySurface64
-    4300004: polySurface65
+    400002: Button__border
+    400004: Button_plate
+    2300000: Button__border
+    2300002: Button_plate
+    3300000: Button__border
+    3300002: Button_plate
+    4300000: Button_plate
+    4300002: Button__border
+    9500000: //RootNode
   materials:
     importMaterials: 0
     materialName: 0
@@ -62,7 +60,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 0
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -78,7 +76,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
