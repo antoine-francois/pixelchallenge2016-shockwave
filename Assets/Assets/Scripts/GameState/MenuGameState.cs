@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainGameState : MonoBehaviour
+public class MenuGameState : MonoBehaviour
 {
-    static public MainGameState Instance { get; private set; }
+    static public MenuGameState Instance { get; private set; }
 
     public StateManager _tManager { get; private set; }
+    public MenuManager _tMenuManager;
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
     }
 
 	void Start ()
