@@ -8,6 +8,7 @@ public class ShockwaveFactory : MonoBehaviour
     public GameObject _tShockwavePrefab;
     public GameObject _tShockwavePreviewPrefab;
 
+    public Transform _tTarget;
 
 	void Awake()
     {
@@ -17,36 +18,19 @@ public class ShockwaveFactory : MonoBehaviour
 
     public void CreateShockwave( float fPower, float fRadius )
     {
-        Vector3 tCamPos = Camera.main.transform.position;
+        GameObject tWave = Instantiate(_tShockwavePrefab);
+        tWave.transform.localPosition = new Vector3(_tTarget.position.x, _tTarget.position.y, _tTarget.position.z);
+        tWave.transform.localScale = new Vector3(fRadius, fRadius, fRadius);
 
-        RaycastHit tHit;
-        if( Physics.Raycast( tCamPos, Vector3.down, out tHit ) )
-        {
-            GameObject tWave = Instantiate( _tShockwavePrefab );
-            tWave.transform.localPosition = new Vector3( tCamPos.x, 0f, tCamPos.z );
-            tWave.transform.localScale = new Vector3( fRadius, fRadius, fRadius );
-
-            tWave.GetComponent<Shockwave>()._fPower = fPower;
-
-            /*BallManager.Instance.DoStuffOnEachBalls( new BallActionCallback( c => {
-                c._tRigidbody.WakeUp();
-            } ) );*/
-        }
+        tWave.GetComponent<Shockwave>()._fPower = fPower;
     }
 
     public GameObject CreateShockwavePreview( float fRadius )
     {
-        Vector3 tCamPos = Camera.main.transform.position;
+        GameObject tWave = Instantiate(_tShockwavePreviewPrefab);
+        tWave.transform.localPosition = new Vector3(_tTarget.position.x, _tTarget.position.y, _tTarget.position.z);
+        tWave.transform.localScale = new Vector3(fRadius, fRadius, fRadius);
 
-        RaycastHit tHit;
-        if( Physics.Raycast( tCamPos, Vector3.down, out tHit ) )
-        {
-            GameObject tWave = Instantiate( _tShockwavePreviewPrefab );
-            tWave.transform.localPosition = new Vector3( tCamPos.x, 0f, tCamPos.z );
-            tWave.transform.localScale = new Vector3( fRadius, fRadius, fRadius );
-
-            return tWave;
-        }
-        return null;
+        return tWave;
     }
 }

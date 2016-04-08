@@ -24,7 +24,6 @@ public class Player
 
     public PlayerState _eState = PlayerState.Intro;
 
-    private Vector2 _tPlayerPos = new Vector2( 0f, 0f );
     private const float CAMERA_SPEED = 0.25f;
 
     private const float SHOCKWAVE_RADIUS_INC = 0.05f;
@@ -42,10 +41,7 @@ public class Player
     public bool Update()
     {
         if( _eState == PlayerState.Play )
-        {
-            _tPlayerPos += new Vector2( Joystick.GetAxis( "LeftX", 0 ), - Joystick.GetAxis( "LeftY", 0 ) ) * CAMERA_SPEED;
-            Camera.main.transform.position = new Vector3( _tPlayerPos.x, Camera.main.transform.position.y, _tPlayerPos.y );
-        
+        {        
             if( Joystick.GetButtonDown( "A", 0 ) )
             {
                 _eState = PlayerState.ChargeShockwave;

@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Assets/_Scenes/GameMain.unity
   - enabled: 1
     path: Assets/Assets/_Scenes/EmptyScene.unity
+  - enabled: 1
+    path: Assets/Assets/_Scenes/MapScene.unity
