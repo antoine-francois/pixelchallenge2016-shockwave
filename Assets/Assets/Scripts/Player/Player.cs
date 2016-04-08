@@ -26,8 +26,8 @@ public class Player
 
     private const float CAMERA_SPEED = 0.25f;
 
-    private const float SHOCKWAVE_RADIUS_INC = 0.05f;
-    private const float SHOCKWAVE_POWER_INC = 0.1f;
+    private const float SHOCKWAVE_RADIUS_INC = 0.05f * 60f;
+    private const float SHOCKWAVE_POWER_INC = 0.1f * 60f;
 
     private const float SHOCKWAVE_MAX_RADIUS = 10f;
     private const float SHOCKWAVE_MAX_POWER = 30f;
@@ -54,10 +54,10 @@ public class Player
         }
         else if( _eState == PlayerState.ChargeShockwave )
         {
-            _fShockwavePower += SHOCKWAVE_POWER_INC;
+            _fShockwavePower += SHOCKWAVE_POWER_INC * Time.deltaTime;
             _fShockwavePower = Mathf.Clamp( _fShockwavePower, 0.1f, SHOCKWAVE_MAX_POWER );
 
-            _fShockwaveRadius += SHOCKWAVE_RADIUS_INC;
+            _fShockwaveRadius += SHOCKWAVE_RADIUS_INC * Time.deltaTime;
             _fShockwaveRadius = Mathf.Clamp( _fShockwaveRadius, 1f, SHOCKWAVE_MAX_RADIUS );
 
 
