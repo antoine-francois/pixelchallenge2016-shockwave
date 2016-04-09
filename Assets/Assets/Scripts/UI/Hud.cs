@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Hud : MonoBehaviour
 {
     [Header("HUD")]
-    public List<Text> _tScoreList;
+    public List<GameObject> _tScoreList;
     public Text _tTimer;
     public Text _tTimeOut;
     public Text _tCurrentPlayer;
@@ -18,9 +18,8 @@ public class Hud : MonoBehaviour
     void Start()
     {
         TogglePause( false );
-        for( int i = 0; i < _tScoreList.Count; i++ )
-        {
-            _tScoreList[i].gameObject.SetActive( ( i < GameSettings._iNbPlayers ) ? true : false );
+        for( int i = 0; i < _tScoreList.Count; i++ ) {
+            _tScoreList[i].SetActive( ( i < GameSettings._iNbPlayers ) ? true : false );
         }
     }
 
@@ -28,7 +27,6 @@ public class Hud : MonoBehaviour
     {
         if( _tPauseRoot.activeSelf && Input.GetButtonUp( "Submit" ) )
         {
-            Debug.Log( "QUIT PAUSE" );
             PointerEventData tPointer = new PointerEventData(EventSystem.current); // pointer event for Execute
             ExecuteEvents.Execute( EventSystem.current.currentSelectedGameObject, tPointer, ExecuteEvents.submitHandler );
         }
@@ -39,7 +37,7 @@ public class Hud : MonoBehaviour
         for( int i = 0; i < GameSettings._iNbPlayers; i++ )
         {
             PlayerColor eColor = (PlayerColor)i;
-            _tScoreList[i].text =  string.Format( "{0}\n{1}", eColor.ToString(), PlayerManager.Instance._tPlayers[eColor]._iScore );
+            _tScoreList[i].GetComponentInChildren<Text>().text = PlayerManager.Instance._tPlayers[eColor]._iScore.ToString();
         }
 
         _tTimer.text = PlayerManager.Instance.GetChrono();

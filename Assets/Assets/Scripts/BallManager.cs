@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public delegate void BallActionCallback( Ball tBall );
 
@@ -68,4 +69,9 @@ public class BallManager : MonoBehaviour
         }
         return bMove;
     }
+
+    public int GetScore( PlayerColor eColor )
+    {
+        return _iNbBalls / GameSettings._iNbPlayers - _tBallList.Count( c => c._ePlayer == eColor );
+    } 
 }
