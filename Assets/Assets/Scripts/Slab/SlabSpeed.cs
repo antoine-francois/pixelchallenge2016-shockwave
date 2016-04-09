@@ -3,12 +3,13 @@ using System.Collections;
 
 public class SlabSpeed : Slab
 {
-    [Range(0.2f, 5f)]
+    [Range(0.2f, 30f)]
     public float _fMultiplicator = 2f;
 
     public override void Activate( Ball tBall )
     {
         base.Activate( tBall );
-        tBall._tRigidbody.velocity *= _fMultiplicator;
+        Debug.Log( "Activate Slab Speed" );
+        tBall._tRigidbody.velocity = transform.forward * _fMultiplicator;
     }
 }

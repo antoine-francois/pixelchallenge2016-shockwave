@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 442356}
   - 33: {fileID: 3368518}
-  - 65: {fileID: 6527026}
   - 23: {fileID: 2349062}
   m_Layer: 0
   m_Name: Mask1
@@ -27,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 453944}
   - 33: {fileID: 3322694}
-  - 65: {fileID: 6560736}
   - 23: {fileID: 2376676}
   m_Layer: 0
   m_Name: Mask2
@@ -283,18 +281,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106758}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6527026
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106758}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6546432
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -307,18 +293,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.05, z: 1.4}
   m_Center: {x: 0, y: 0.02, z: 0}
---- !u!65 &6560736
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124872}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11428198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bCooldown: 0
   _iCooldownDuration: 2
-  _fMultiplicator: 2
+  _fMultiplicator: 20
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
