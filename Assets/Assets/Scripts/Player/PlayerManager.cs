@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
     private float _fTimer = 0f;
     private float _fPlayTimer = 0f;
 
+    private int _iTurnCount = 1;
+    public int TurnCount { get { return _iTurnCount; } }
+
     public const float MAX_TIME = 30f;
     public const float TIME_OUT = 1.5f;
     public const float INTRO_TIME = 1.5f;
@@ -72,6 +75,7 @@ public class PlayerManager : MonoBehaviour
 
         _tPlayers[_iCurrentPlayer]._eState = PlayerState.Intro;
 
+        _iTurnCount++;
         MechanismManager.Instance.NextTurn();
     }
 

@@ -35,7 +35,8 @@ public class CameraManager : MonoBehaviour
     {
         int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
 
-        if( PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.ChargeShockwave ) {
+        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
+        if( eState == PlayerState.ChargeShockwave ) {
             return;
         }
 
@@ -57,8 +58,8 @@ public class CameraManager : MonoBehaviour
 
         GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
 
-        float fMoveX = Joystick.GetAxis( XInputKey.LStickX, tState );
-        float fMoveY = Joystick.GetAxis( XInputKey.LStickY, tState );
+        float fMoveX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickX, tState ) : 0f;
+        float fMoveY = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickY, tState ) : 0f;
 
         Vector3 right = transform.right;
         right.y = 0.0f;
@@ -69,7 +70,7 @@ public class CameraManager : MonoBehaviour
 
         _tTarget.Translate( (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime, Space.World );
 
-        float fTurnX = Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime;
+        float fTurnX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
 
         _fAzimuthAngle += fTurnX;
 

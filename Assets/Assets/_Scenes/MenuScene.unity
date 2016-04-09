@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1386081837}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!1 &682345731
@@ -1536,7 +1536,6 @@ MonoBehaviour:
   - {fileID: 284861322}
   - {fileID: 682345733}
   _tSplashRoot: {fileID: 531924273}
-  _tPressStartRoot: {fileID: 0}
   _tMainMenuRoot: {fileID: 536828475}
   _tPlayerSelectionRoot: {fileID: 372632773}
   _tCreditsRoot: {fileID: 391206805}

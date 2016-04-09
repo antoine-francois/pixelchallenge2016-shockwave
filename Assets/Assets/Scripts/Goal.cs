@@ -19,6 +19,9 @@ public class Goal : MonoBehaviour
 
             if( iScore == BallManager.Instance._iNbBalls / GameSettings._iNbPlayers )
             {
+                EndLevel._iTurnCount = PlayerManager.Instance.TurnCount;
+                EndLevel._iWinner = tBall._iPlayer;
+
                 SceneManager.LoadScene( "EndLevel" );
             }
         }
