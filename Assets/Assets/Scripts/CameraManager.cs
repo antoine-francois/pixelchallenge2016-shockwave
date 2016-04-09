@@ -58,8 +58,10 @@ public class CameraManager : MonoBehaviour
 
         GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
 
+        bool bFirstShot = ( PlayerManager.Instance.TurnCount == 1 && eState == PlayerState.Play );
+
         float fMoveX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickX, tState ) : 0f;
-        float fMoveY = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickY, tState ) : 0f;
+        float fMoveY = ( eState != PlayerState.Intro && !bFirstShot ) ? Joystick.GetAxis( XInputKey.LStickY, tState ) : 0f;
 
         Vector3 right = transform.right;
         right.y = 0.0f;
@@ -70,7 +72,7 @@ public class CameraManager : MonoBehaviour
 
         _tTarget.Translate( (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime, Space.World );
 
-        float fTurnX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
+        float fTurnX = ( eState != PlayerState.Intro && !bFirstShot ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
 
         _fAzimuthAngle += fTurnX;
 
