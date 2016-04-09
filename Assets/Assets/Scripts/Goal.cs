@@ -14,7 +14,6 @@ public class Goal : MonoBehaviour
             Ball tBall = tCollider.GetComponent<Ball>();
             int iScore = PlayerManager.Instance._tPlayers[tBall._ePlayer].IncrementScore();
 
-            StartCoroutine( PlayerManager.Instance._tPlayers[tBall._ePlayer].ControllerVibration( 0.8f, 0.1f ) );
 
             Destroy( tCollider.gameObject, .5f );
             _tSystem.Play();
@@ -25,7 +24,9 @@ public class Goal : MonoBehaviour
                 EndLevel._eWinner = tBall._ePlayer;
 
                 SceneManager.LoadScene( "EndLevel" );
+                return;
             }
+            StartCoroutine( PlayerManager.Instance._tPlayers[tBall._ePlayer].ControllerVibration( 0.8f, 0.1f ) );
         }
     }
 }

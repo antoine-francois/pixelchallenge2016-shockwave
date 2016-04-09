@@ -23,7 +23,7 @@ public class ForceField : GenericMechanism
         _tRenderer.enabled = true;
 
         gameObject.layer = LayerMask.NameToLayer( "P" + tBall._ePlayer.ToString() );
-        GetComponentInChildren<MeshRenderer>().materials[0].color = GameSettings.Instance._tPlayerColors[tBall._ePlayer];
+        GetComponentInChildren<MeshRenderer>().materials[0].SetColor( "_EmissiveColor", GameSettings.Instance._tPlayerColors[tBall._ePlayer] );
     }
 
     public override void Disable()
