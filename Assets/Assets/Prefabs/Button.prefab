@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 467038}
   - 135: {fileID: 13501098}
   - 114: {fileID: 11415064}
+  - 64: {fileID: 6490052}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -70,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 447774}
@@ -155,6 +156,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171582}
   m_Mesh: {fileID: 4300000, guid: 7206129d13eeb2b45884c52bf771237e, type: 3}
+--- !u!64 &6490052
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: e6d54f89ffae1134795f1d086436041f, type: 3}
 --- !u!114 &11415064
 MonoBehaviour:
   m_ObjectHideFlags: 1
