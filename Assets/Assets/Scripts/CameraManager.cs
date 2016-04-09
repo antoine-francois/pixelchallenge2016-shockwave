@@ -58,8 +58,10 @@ public class CameraManager : MonoBehaviour
 
         GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
 
+        bool bFirstShot = ( PlayerManager.Instance.TurnCount == 1 && eState == PlayerState.Play );
+
         float fMoveX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickX, tState ) : 0f;
-        float fMoveY = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.LStickY, tState ) : 0f;
+        float fMoveY = ( eState != PlayerState.Intro && !bFirstShot ) ? Joystick.GetAxis( XInputKey.LStickY, tState ) : 0f;
 
         Vector3 right = transform.right;
         right.y = 0.0f;
@@ -68,9 +70,14 @@ public class CameraManager : MonoBehaviour
         forward.y = 0.0f;
         forward.Normalize();
 
-        _tTarget.Translate( (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime, Space.World );
+        Vector3 tMovement = (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime;
+        _tTarget.Translate( tMovement, Space.World );
 
-        float fTurnX = ( eState != PlayerState.Intro ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
+        if( !Physics.Raycast( transform.parent.position, Vector3.down, ( 1 << LayerMask.NameToLayer( "Floor" ) ) ) ) {
+            _tTarget.Translate( - tMovement, Space.World );
+        }
+
+        float fTurnX = ( eState != PlayerState.Intro && !bFirstShot ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
 
         _fAzimuthAngle += fTurnX;
 
