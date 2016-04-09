@@ -9,13 +9,10 @@
 	
 	SubShader
 	{
-		Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+		Tags { "RenderType"="Opaque" "Queue"="Geometry" }
 
 		Pass
 		{
-			Blend SrcAlpha OneMinusSrcAlpha
-			ZWrite Off
-
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -54,6 +51,8 @@
 				float4 o = tex2D(_MainTex, i.uv);
 
 				o.rgb *= _EmissiveColor * _EmissivePower;
+
+				clip( o.a < .01f ? -1 : 1 );
 
 				return o;
 			}
