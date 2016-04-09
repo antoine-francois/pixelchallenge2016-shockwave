@@ -34,10 +34,13 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerManager.Instance._tPlayers[PlayerManager.Instance._iCurrentPlayer]._eState == PlayerState.Play)
+        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
+        int iCurrentPad = ( GameSettings._iNbGamepad == 1 ) ? 0 : iCurrentPlayer;
+
+        if (PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.Play)
         {
-            float fMoveX = Joystick.GetAxis("LeftX", 0);
-            float fMoveY = Joystick.GetAxis("LeftY", 0);
+            float fMoveX = Joystick.GetAxis("LeftX", iCurrentPad);
+            float fMoveY = Joystick.GetAxis("LeftY", iCurrentPad);
 
             Vector3 right = transform.right;
             right.y = 0.0f;
@@ -49,9 +52,9 @@ public class CameraManager : MonoBehaviour
             _tTarget.Translate((right * fMoveX + forward * fMoveY).normalized * _fMoveSpeed * Time.deltaTime, Space.World);
         }
 
-        float fTurnX = Joystick.GetAxis("RightX", 0) * _fAzimuthSpeed * Time.deltaTime;
-        float fTurnY = Joystick.GetAxis("RightY", 0) * _fPolarSpeed * Time.deltaTime;
-        float fZoom = (Joystick.GetAxis("RT", 0) - Joystick.GetAxis("LT", 0)) * _fRadialSpeed * Time.deltaTime;
+        float fTurnX = Joystick.GetAxis("RightX", iCurrentPad) * _fAzimuthSpeed * Time.deltaTime;
+        float fTurnY = Joystick.GetAxis("RightY", iCurrentPad) * _fPolarSpeed * Time.deltaTime;
+        float fZoom = (Joystick.GetAxis("RT", iCurrentPad) - Joystick.GetAxis("LT", iCurrentPad)) * _fRadialSpeed * Time.deltaTime;
 
         _fAzimuthAngle += fTurnX;
         _fPolarAngle += fTurnY;

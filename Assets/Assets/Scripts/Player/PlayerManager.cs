@@ -24,7 +24,7 @@ public class PlayerManager
     private float _fTimer = 0f;
     private float _fPlayTimer = 0f;
 
-    public const float MAX_TIME = 8f;
+    public const float MAX_TIME = 15f;
     public const float TIME_OUT = 1.5f;
     public const float INTRO_TIME = 1.5f;
 
