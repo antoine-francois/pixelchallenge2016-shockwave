@@ -15,7 +15,7 @@ public enum PlayerState
 public class Player
 {
 	public int _iID;
-    public int _iScore;
+    public int _iScore { get; private set; }
 
     // XInput stuff
     private PlayerIndex _ePlayerIndex;
@@ -108,5 +108,11 @@ public class Player
             return true;
         }
         return false;
+    }
+
+    public int IncrementScore()
+    {
+        _iScore++;
+        return _iScore;
     }
 }

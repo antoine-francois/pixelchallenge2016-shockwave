@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Goal : MonoBehaviour
@@ -11,10 +12,15 @@ public class Goal : MonoBehaviour
         if( tCollider.tag == "Ball" )
         {
             Ball tBall = tCollider.GetComponent<Ball>();
-            PlayerManager.Instance._tPlayers[tBall._iPlayer]._iScore++;
+            int iScore = PlayerManager.Instance._tPlayers[tBall._iPlayer].IncrementScore();
+
             Destroy( tCollider.gameObject, .5f );
-            MenuGameState.Instance._tMenuManager.UpdateHUD();
             _tSystem.Play();
+
+            if( iScore == BallManager.Instance._iNbBalls / GameSettings._iNbPlayers )
+            {
+                SceneManager.LoadScene( "EndLevel" );
+            }
         }
     }
 }

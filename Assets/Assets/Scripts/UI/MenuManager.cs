@@ -14,11 +14,9 @@ public class MenuManager : MonoBehaviour
     public Image _tSplash;
     public Image _tSplashFade;
 
-    [Header("HUD")]
-    public List<Text> _tScoreList;
-    public Text _tTimer;
-    public Text _tTimeOut;
-    public Text _tCurrentPlayer;
+    private float _fCurrentTimer = 0.0f;
+    private float _fFadeSpeed = 1.0f;
+    private float _fWaitTime = 5.0f;
 
     [Header("Player Selection")]
     public List<Text> _tPlayerInfo = new List<Text>();
@@ -30,12 +28,9 @@ public class MenuManager : MonoBehaviour
 
     [Header("Menus Root")]
     public GameObject _tSplashRoot;
-    public GameObject _tPressStartRoot;
     public GameObject _tMainMenuRoot;
     public GameObject _tPlayerSelectionRoot;
     public GameObject _tCreditsRoot;
-    public GameObject _tHUDRoot;
-    public GameObject _tPauseRoot;
     public GameObject _tLoadingRoot;
 
     public delegate void BackCallback();
@@ -50,6 +45,9 @@ public class MenuManager : MonoBehaviour
             _bValidated[i] = false;
             _bConfirmed[i] = false;
         }
+
+        DisableAll();
+        _tSplashRoot.SetActive( true );
     }
 
     void Update()
@@ -58,7 +56,21 @@ public class MenuManager : MonoBehaviour
             Back();
         }
 
-        if( _tPlayerSelectionRoot.activeSelf )
+        if( _tSplashRoot.activeSelf )
+        {
+            _fCurrentTimer += Time.deltaTime;
+
+            float fFade = Mathf.Clamp01( Mathf.Sin( _fCurrentTimer * Mathf.PI / _fWaitTime ) * _fFadeSpeed );
+
+            _tSplashFade.color = new Color(0, 0, 0, fFade);
+
+            if (_fCurrentTimer >= 1.0f || Input.anyKeyDown)
+            {
+                _tSplashRoot.SetActive( false );
+                _tMainMenuRoot.SetActive( true );
+            }
+        }
+        else if( _tPlayerSelectionRoot.activeSelf )
         {
             int iConfirmed = 0;
             int iValidated = 0;
@@ -118,34 +130,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void UpdateHUD()
-    {
-        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
-        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
-        for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
-            _tScoreList[i].text =  string.Format( "P{0}\n{1}", i + 1, PlayerManager.Instance._tPlayers[i]._iScore );
-        }
-
-        _tTimer.text = PlayerManager.Instance.GetChrono();
-
-        _tTimeOut.gameObject.SetActive( eState == PlayerState.Timeout );
-
-        _tCurrentPlayer.gameObject.SetActive( eState == PlayerState.Intro );
-        _tCurrentPlayer.text = "Player " + ( iCurrentPlayer + 1 );
-    }
-
-    public void GoToPressStart()
-    {
-        DisableAll();
-        _tPressStartRoot.SetActive(true);
-        _PreviousMenu = null;
-    }
-
     public void GoToMainMenu()
     {
         DisableAll();
-        _tMainMenuRoot.SetActive(true);
-        _PreviousMenu = GoToPressStart;
+        _tMainMenuRoot.SetActive( true );
+        _PreviousMenu = null;
     }
 
 
@@ -159,84 +148,59 @@ public class MenuManager : MonoBehaviour
     public void GoToCredits()
     {
         DisableAll();
-        _tCreditsRoot.SetActive(true);
+        _tCreditsRoot.SetActive( true );
         _PreviousMenu = GoToMainMenu;
-    }
-
-    public void GoToHUD()
-    {
-        DisableAll();
-        _tHUDRoot.SetActive(true);
-        _PreviousMenu = GoToPause;
-    }
-
-    public void GoToPause()
-    {
-        DisableAll();
-        _tPauseRoot.SetActive(true);
-        _PreviousMenu = GoToHUD;
     }
 
     public void Back()
     {
-        if (_PreviousMenu != null)
+        if( _PreviousMenu != null )
         {
             DisableAll();
             _PreviousMenu();
         }
     }
 
-    public void QuitApplication()
+    public void QuitGame()
     {
         Application.Quit();
     }
 
-    public void QuitGame()
-    {
-        StartCoroutine(LoadLevelManager("EmptyScene", GoToMainMenu));
-        MenuGameState.Instance._tManager.ChangeState(new MainMenu());
-    }
-
     public void DisableAll()
     {
-        _tSplashRoot.SetActive(false);
-        _tPressStartRoot.SetActive(false);
-        _tMainMenuRoot.SetActive(false);
-        _tCreditsRoot.SetActive(false);
-        _tHUDRoot.SetActive(false);
-        _tPauseRoot.SetActive(false);
-        _tPlayerSelectionRoot.SetActive(false);
+        _tSplashRoot.SetActive( false );
+        _tMainMenuRoot.SetActive( false );
+        _tCreditsRoot.SetActive( false );
+        _tPlayerSelectionRoot.SetActive( false );
     }
 
-    public void LoadLevel(string LevelName)
+    public void LoadLevel( string sLevelName )
     {
         DisableAll();
-        MenuGameState.Instance._tManager.ChangeState(new InGame());
-        StartCoroutine(LoadLevelManager(LevelName, GoToHUD));
+        StartCoroutine( LoadLevelManager( sLevelName ) );
     }
 
-    public IEnumerator LoadLevelManager(string name, BackCallback newMenu)
+    public IEnumerator LoadLevelManager( string sName )
     {
-        AsyncOperation loading = SceneManager.LoadSceneAsync(name);
-        loading.allowSceneActivation = true;
+        AsyncOperation tLoading = SceneManager.LoadSceneAsync( sName );
+        tLoading.allowSceneActivation = true;
         _tLoadingRoot.SetActive(true);
 
-        Slider slider = _tLoadingRoot.transform.FindChild("Slider").GetComponent<Slider>();
+        Slider tSlider = _tLoadingRoot.transform.FindChild( "Slider" ).GetComponent<Slider>();
 
-        while (!loading.isDone)
+        while (!tLoading.isDone)
         {
-            slider.value = loading.progress;
+            tSlider.value = tLoading.progress;
             yield return new WaitForFixedUpdate();
         }
 
         _tLoadingRoot.SetActive(false);
 
-        if (EventSystem.current != null)
+        if( EventSystem.current != null )
         {
-            if (EventSystem.current.firstSelectedGameObject != null)
+            if( EventSystem.current.firstSelectedGameObject != null ) {
                 EventSystem.current.firstSelectedGameObject.GetComponent<Selectable>().Select();
+            }
         }
-
-        newMenu();
     }
 }

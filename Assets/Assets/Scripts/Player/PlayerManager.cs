@@ -2,23 +2,13 @@
 using System;
 using System.Collections.Generic;
 
-public class PlayerManager
+public class PlayerManager : MonoBehaviour
 {
-    static private PlayerManager _sInstance;
-    static public PlayerManager Instance
-    {
-        get
-        {
-            if (_sInstance == null)
-                _sInstance = new PlayerManager();
-
-            return _sInstance;
-        }
-
-        private set {}
-    }
+    static public PlayerManager Instance { get; private set; }
 
     public List<Player> _tPlayers = new List<Player>();
+
+    [HideInInspector]
     public int _iCurrentPlayer = 0;
 
     private float _fTimer = 0f;
@@ -28,15 +18,16 @@ public class PlayerManager
     public const float TIME_OUT = 1.5f;
     public const float INTRO_TIME = 1.5f;
 
-    private PlayerManager()
+    void Awake()
     {
-        for( int i = 0; i < GameSettings._iNbPlayers; i++ )
-        {
+        Instance = this;
+
+        for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
             _tPlayers.Add( new Player( i ) );
         }
     }
 
-    public bool Update()
+    void Update()
     {
         switch( _tPlayers[_iCurrentPlayer]._eState )
         {
@@ -50,9 +41,9 @@ public class PlayerManager
             case PlayerState.Timeout:
                 _fTimer += Time.deltaTime;
                 if( _fTimer > TIME_OUT ) {
-                    return true;
+                    NextPlayer();
                 }
-                return false;
+                return;
 
             case PlayerState.Intro:
                 _fTimer += Time.deltaTime;
@@ -61,10 +52,12 @@ public class PlayerManager
                     _fTimer = 0f;
                     _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
                 }
-                return false;
+                return;
         }
 
-        return _tPlayers[_iCurrentPlayer].Update();
+        if( _tPlayers[_iCurrentPlayer].Update() ) {
+            NextPlayer();
+        }
     }
 
     public void NextPlayer()
@@ -78,6 +71,8 @@ public class PlayerManager
         }
 
         _tPlayers[_iCurrentPlayer]._eState = PlayerState.Intro;
+
+        MechanismManager.Instance.NextTurn();
     }
 
     public string GetChrono()

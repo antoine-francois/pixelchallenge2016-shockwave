@@ -11,6 +11,8 @@ public class BallManager : MonoBehaviour
     public List<GameObject> _tBallPrefab = new List<GameObject>();
     private List<Ball> _tBallList = new List<Ball>();
 
+    public int _iNbBalls { get; private set; }
+
     private const float MIN_VELOCITY_SQR = 0.04f;
 
     void Awake()
@@ -20,8 +22,9 @@ public class BallManager : MonoBehaviour
 
     void Start()
     {
+        _iNbBalls = transform.childCount;
         int iPlayers = GameSettings._iNbPlayers;
-        for( int i = 0; i < transform.childCount; i++ )
+        for( int i = 0; i < _iNbBalls; i++ )
         {
             GameObject tBall = Instantiate( _tBallPrefab[ ( iPlayers + i ) % iPlayers ] );
             tBall.transform.SetParent( transform.GetChild(i) );
