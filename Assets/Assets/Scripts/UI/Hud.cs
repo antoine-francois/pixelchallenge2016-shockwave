@@ -9,7 +9,7 @@ public class Hud : MonoBehaviour
     [Header("HUD")]
     public List<GameObject> _tScoreList;
     public Text _tTimer;
-    public Text _tTimeOut;
+    public GameObject _tTimeOut;
     public Text _tCurrentPlayer;
 
     [Header("Pause")]
@@ -41,9 +41,9 @@ public class Hud : MonoBehaviour
         }
 
         _tTimer.text = PlayerManager.Instance.GetChrono();
-        _tTimeOut.gameObject.SetActive( eState == PlayerState.Timeout );
+        _tTimeOut.SetActive( eState == PlayerState.Timeout );
 
-        _tCurrentPlayer.gameObject.SetActive( eState == PlayerState.Intro );
+        _tCurrentPlayer.transform.parent.gameObject.SetActive( eState == PlayerState.Intro );
         _tCurrentPlayer.text = "Player " + eCurrentPlayer.ToString();
 
         if( Input.GetKeyDown( KeyCode.JoystickButton7 ) )
