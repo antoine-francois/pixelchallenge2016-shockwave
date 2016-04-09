@@ -34,6 +34,10 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if( GameSettings.Instance._bPause ) {
+            return;
+        }
+
         switch( _tPlayers[_eCurrentPlayer]._eState )
         {
             case PlayerState.Play:
@@ -67,7 +71,6 @@ public class PlayerManager : MonoBehaviour
 
     public void NextPlayer()
     {
-
         _fPlayTimer = 0f;
         _fTimer = 0f;
         _eCurrentPlayer = (PlayerColor)( _iTurnCount % GameSettings._iNbPlayers );

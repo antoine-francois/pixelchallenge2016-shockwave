@@ -1694,8 +1694,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 1347526042}
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1840,12 +1840,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tTarget: {fileID: 284157452}
   _tMark: {fileID: 111679519}
-  _tP1: {r: 1, g: 0, b: 0, a: 1}
-  _tP2: {r: 0, g: 0.58431375, b: 1, a: 1}
-  _tP3: {r: 0.16078432, g: 0.99215686, b: 0.050980393, a: 1}
-  _tP4: {r: 0.81960785, g: 1, b: 0, a: 1}
   _fMoveSpeed: 10
-  _fRadialDistance: 30
+  _fRadialDistance: 20
   _fPolarAngle: 45
   _fAzimuthAngle: 180
   _tAzimuthLimit: {x: 0, y: 360}
@@ -2201,6 +2197,67 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &996938740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 996938741}
+  - 114: {fileID: 996938743}
+  - 114: {fileID: 996938742}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &996938741
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 996938740}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -639.45764, y: -360.00003, z: 0}
+  m_LocalScale: {x: 1.2203391, y: 1.2203391, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1347526041}
+  m_RootOrder: 3
+--- !u!114 &996938742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 996938740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Useless
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &996938743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 996938740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 195337039}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
 --- !u!1 &1016851906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,7 +2798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7eb45571afa744eb25b43708e2275f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iCurrentPlayer: 0
+  _eCurrentPlayer: 0
 --- !u!114 &1277665290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3041,6 +3098,7 @@ RectTransform:
   - {fileID: 111679518}
   - {fileID: 1779951235}
   - {fileID: 1927677921}
+  - {fileID: 996938741}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}

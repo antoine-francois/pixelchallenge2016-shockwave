@@ -20,6 +20,8 @@ public class GameSettings
     public Dictionary<PlayerColor, Color> _tPlayerColors = new Dictionary<PlayerColor, Color>();
     public List<PlayerColor> _tColorOrder;
 
+    public bool _bPause = false;
+
     private GameSettings()
     {
         _tPlayerColors.Add( PlayerColor.Red, new Color( 1f, 0f, 0f, 1f ) );

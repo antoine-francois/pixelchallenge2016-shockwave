@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public class Hud : MonoBehaviour
@@ -24,6 +26,13 @@ public class Hud : MonoBehaviour
 
     void Update()
     {
+        if( _tPauseRoot.activeSelf && Input.GetButtonUp( "Submit" ) )
+        {
+            Debug.Log( "QUIT PAUSE" );
+            PointerEventData tPointer = new PointerEventData(EventSystem.current); // pointer event for Execute
+            ExecuteEvents.Execute( EventSystem.current.currentSelectedGameObject, tPointer, ExecuteEvents.submitHandler );
+        }
+
         PlayerColor eCurrentPlayer = PlayerManager.Instance._eCurrentPlayer;
         PlayerState eState = PlayerManager.Instance._tPlayers[eCurrentPlayer]._eState;
 
@@ -47,7 +56,13 @@ public class Hud : MonoBehaviour
 
     public void TogglePause( bool bState )
     {
+        GameSettings.Instance._bPause = bState;
         _tPauseRoot.SetActive( bState );
         Time.timeScale = ( bState ) ? 0f : 1f;
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene( "MenuScene" );
     }
 }

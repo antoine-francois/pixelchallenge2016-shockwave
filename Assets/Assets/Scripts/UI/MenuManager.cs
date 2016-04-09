@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
     private bool[] _bConfirmed = new bool[4];
 
     private bool _bSelectionFinalize = false;
-    private float _fSelectionTimer = 10f;
+    private float _fSelectionTimer = 5f;
 
     private GamePadState[] _tPadState = new GamePadState[4];
 
