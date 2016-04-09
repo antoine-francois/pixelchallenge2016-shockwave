@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Ball_P2
-  m_Shader: {fileID: 4800000, guid: d5a394f3eeb0fbb4f9d30ade4b0d63d2, type: 3}
+  m_Name: Projector
+  m_Shader: {fileID: 4800000, guid: c10fd064639de804aa78f9eae4168e7d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 09c4e55856cd7e242aa6924159ceba56, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -80,23 +80,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _NormalTex
+          name: _ProjectedTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 336d4cff310b2864699ee7017f895b40, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _M_S_AOTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 68a66bae8993cd44b95b34775eaae677, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Emissive
-        second:
-          m_Texture: {fileID: 2800000, guid: 9b952072a953c984cb0a885d9769f8bf, type: 3}
+          m_Texture: {fileID: 2800000, guid: 529239097d02f9f42b0ddd436c6fcbb0, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -148,10 +134,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _EmissivePower
-        second: 3
     m_Colors:
       data:
         first:
@@ -161,7 +143,3 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _EmissiveColor
-        second: {r: 0, g: 0.5862067, b: 1, a: 1}

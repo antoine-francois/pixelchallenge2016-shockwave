@@ -33,10 +33,10 @@ public class Player
     private const float CAMERA_SPEED = 0.25f;
 
     private const float SHOCKWAVE_RADIUS_INC = 0.05f * 60f;
-    private const float SHOCKWAVE_POWER_INC = 0.1f * 60f;
+    private const float SHOCKWAVE_POWER_INC = 0.2f * 60f;
 
     private const float SHOCKWAVE_MAX_RADIUS = 10f;
-    private const float SHOCKWAVE_MAX_POWER = 30f;
+    private const float SHOCKWAVE_MAX_POWER = 40f;
 
     public Player( int iId )
     {

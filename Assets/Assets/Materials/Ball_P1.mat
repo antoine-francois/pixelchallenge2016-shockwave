@@ -164,4 +164,4 @@ Material:
       data:
         first:
           name: _EmissiveColor
-        second: {r: 0, g: 0.703, b: 1, a: 1}
+        second: {r: 1, g: 0, b: 0, a: 1}

@@ -24,7 +24,7 @@ public class PlayerManager
     private float _fTimer = 0f;
     private float _fPlayTimer = 0f;
 
-    public const float MAX_TIME = 15f;
+    public const float MAX_TIME = 30f;
     public const float TIME_OUT = 1.5f;
     public const float INTRO_TIME = 1.5f;
 
@@ -83,6 +83,6 @@ public class PlayerManager
     public string GetChrono()
     {
         TimeSpan tTime = TimeSpan.FromSeconds( Mathf.Clamp( MAX_TIME - _fPlayTimer, 0f, MAX_TIME ) );
-        return string.Format( "{0:00}:{1:00}.{2:000}", tTime.Minutes, tTime.Seconds, tTime.Milliseconds );
+        return string.Format( "{0:00}.{1:000}", tTime.Seconds, tTime.Milliseconds );
     }
 }

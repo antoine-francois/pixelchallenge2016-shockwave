@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
     public Transform _tTarget;
+    public Image _tMark;
+    public Color _tP1;
+    public Color _tP2;
+    public Color _tP3;
+    public Color _tP4;
 
     [Header("Move")]
     public float _fMoveSpeed;
@@ -12,15 +18,11 @@ public class CameraManager : MonoBehaviour
     [Header("Distance")]
 
     public float _fRadialDistance;
-    public Vector2 _tDistanceLimit;
-    public float _fRadialSpeed;
 
     [Header("Polar")]
 
     [Range(0, 180)]
     public float _fPolarAngle;
-    public Vector2 _tPolarLimit;
-    public float _fPolarSpeed;
 
     [Header("Azimuth")]
 
@@ -32,34 +34,46 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
-        GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
 
-        if (PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.Play)
-        {
-            float fMoveX = Joystick.GetAxis( XInputKey.LStickX, tState );
-            float fMoveY = Joystick.GetAxis( XInputKey.LStickY, tState );
-
-            Vector3 right = transform.right;
-            right.y = 0.0f;
-            right.Normalize();
-            Vector3 forward = -transform.forward;
-            forward.y = 0.0f;
-            forward.Normalize();
-
-            _tTarget.Translate((right * fMoveX + forward * fMoveY).normalized * _fMoveSpeed * Time.deltaTime, Space.World);
+        if( PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.ChargeShockwave ) {
+            return;
         }
 
+        switch( iCurrentPlayer )
+        {
+            case 0:
+                _tMark.color = _tP1;
+                break;
+            case 1:
+                _tMark.color = _tP2;
+                break;
+            case 2:
+                _tMark.color = _tP3;
+                break;
+            case 3:
+                _tMark.color = _tP4;
+                break;
+        }
+
+        GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
+
+        float fMoveX = Joystick.GetAxis( XInputKey.LStickX, tState );
+        float fMoveY = Joystick.GetAxis( XInputKey.LStickY, tState );
+
+        Vector3 right = transform.right;
+        right.y = 0.0f;
+        right.Normalize();
+        Vector3 forward = -transform.forward;
+        forward.y = 0.0f;
+        forward.Normalize();
+
+        _tTarget.Translate( (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime, Space.World );
+
         float fTurnX = Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime;
-        float fTurnY = Joystick.GetAxis( XInputKey.RStickY, tState ) * _fPolarSpeed * Time.deltaTime;
-        float fZoom = ( Joystick.GetAxis( XInputKey.RT, tState ) - Joystick.GetAxis( XInputKey.LT, tState ) ) * _fRadialSpeed * Time.deltaTime;
 
         _fAzimuthAngle += fTurnX;
-        _fPolarAngle += fTurnY;
-        _fRadialDistance += fZoom;
 
-        _fPolarAngle = Mathf.Clamp(Mathf.Repeat( _fPolarAngle, 180.0f ), _tPolarLimit.x, _tPolarLimit.y);
         _fAzimuthAngle = Mathf.Clamp( Mathf.Repeat( _fAzimuthAngle, 360.0f ), _tAzimuthLimit.x, _tAzimuthLimit.y);
-        _fRadialDistance = Mathf.Clamp(_fRadialDistance, _tDistanceLimit.x, _tDistanceLimit.y);
 
         float polar = Mathf.Deg2Rad * _fPolarAngle;
         float azimuth = Mathf.Deg2Rad * _fAzimuthAngle;
