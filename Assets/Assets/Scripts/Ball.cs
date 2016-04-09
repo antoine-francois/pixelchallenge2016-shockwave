@@ -68,14 +68,14 @@ public class Ball : MonoBehaviour
             {
                 AudioSource tRdmSource = _Hits[Random.Range(0, _Hits.Length)];
                 tRdmSource.pitch = Random.Range(0.7f, 1.3f);
-                tRdmSource.volume = Mathf.Clamp01(_tRigidbody.velocity.magnitude / 10.0f);
+                tRdmSource.volume = Mathf.Clamp01(_tRigidbody.velocity.magnitude / 5.0f);
                 tRdmSource.Play();
             }
             else if (contact.otherCollider.tag == "Wall")
             {
                 AudioSource tRdmSource = _Walls[Random.Range(0, _Walls.Length)];
                 tRdmSource.pitch = Random.Range(0.7f, 1.3f);
-                tRdmSource.volume = Mathf.Clamp01(_tRigidbody.velocity.magnitude / 10.0f);
+                tRdmSource.volume = Mathf.Clamp01(_tRigidbody.velocity.magnitude / 5.0f);
                 tRdmSource.Play();
             }
         }

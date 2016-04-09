@@ -10,14 +10,6 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
 
-    [Header("Spash screens")]
-    public Image _tSplash;
-    public Image _tSplashFade;
-
-    private float _fCurrentTimer = 0.0f;
-    private float _fFadeSpeed = 1.0f;
-    private float _fWaitTime = 5.0f;
-
     [Header("Player Selection")]
     public List<Text> _tPlayerInfo = new List<Text>();
     private bool[] _bConnected = new bool[4];
@@ -30,7 +22,6 @@ public class MenuManager : MonoBehaviour
     private GamePadState[] _tPadState = new GamePadState[4];
 
     [Header("Menus Root")]
-    public GameObject _tSplashRoot;
     public GameObject _tMainMenuRoot;
     public GameObject _tPlayerSelectionRoot;
     public GameObject _tCreditsRoot;
@@ -50,7 +41,7 @@ public class MenuManager : MonoBehaviour
         }
 
         DisableAll();
-        _tSplashRoot.SetActive( true );
+        _tMainMenuRoot.SetActive(true);
     }
 
     void Update()
@@ -59,21 +50,7 @@ public class MenuManager : MonoBehaviour
             Back();
         }
 
-        if( _tSplashRoot.activeSelf )
-        {
-            _fCurrentTimer += Time.deltaTime;
-
-            float fFade = Mathf.Clamp01( Mathf.Sin( _fCurrentTimer * Mathf.PI / _fWaitTime ) * _fFadeSpeed );
-
-            _tSplashFade.color = new Color(0, 0, 0, fFade);
-
-            if (_fCurrentTimer >= 1.0f || Input.anyKeyDown)
-            {
-                _tSplashRoot.SetActive( false );
-                _tMainMenuRoot.SetActive( true );
-            }
-        }
-        else if( _tPlayerSelectionRoot.activeSelf )
+        if( _tPlayerSelectionRoot.activeSelf )
         {
 
             if( _bSelectionFinalize )
@@ -200,7 +177,6 @@ public class MenuManager : MonoBehaviour
 
     public void DisableAll()
     {
-        _tSplashRoot.SetActive( false );
         _tMainMenuRoot.SetActive( false );
         _tCreditsRoot.SetActive( false );
         _tPlayerSelectionRoot.SetActive( false );

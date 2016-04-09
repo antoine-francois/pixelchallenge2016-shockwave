@@ -134,7 +134,7 @@ Material:
       data:
         first:
           name: _EmissivePower
-        second: 5
+        second: 10
       data:
         first:
           name: _Length
