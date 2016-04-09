@@ -9,12 +9,14 @@
 	SubShader
 	{
 		//Tags { "RenderType"="Transparent" "Queue"="Transparent"}
+		Tags { "RenderType"="Opaque" "Queue"="Geometry" }
 		LOD 100
 
 		Pass
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -30,6 +32,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -45,6 +48,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -60,6 +64,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -75,6 +80,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -90,6 +96,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -105,6 +112,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -120,6 +128,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -135,6 +144,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -150,6 +160,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -165,6 +176,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -180,6 +192,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -195,6 +208,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -210,6 +224,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -225,6 +240,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -240,6 +256,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -255,6 +272,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -270,6 +288,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -285,6 +304,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -300,6 +320,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -315,6 +336,7 @@
 		{
 			Tags { "LightMode" = "ForwardBase" }
 			Blend SrcAlpha OneMinusSrcAlpha
+			Lighting On
 
 			CGPROGRAM
 			#pragma vertex vert
