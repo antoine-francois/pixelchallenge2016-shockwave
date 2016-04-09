@@ -9,7 +9,6 @@ public class SlabSpeed : Slab
     public override void Activate( Ball tBall )
     {
         base.Activate( tBall );
-        Debug.Log( "Activate Slab Speed" );
         tBall._tRigidbody.velocity = transform.forward * _fMultiplicator;
     }
 }

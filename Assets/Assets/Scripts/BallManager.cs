@@ -8,6 +8,7 @@ public class BallManager : MonoBehaviour
 {
     public static BallManager Instance { get; private set; }
 
+    public List<GameObject> _tBallPrefab = new List<GameObject>();
     private List<Ball> _tBallList = new List<Ball>();
 
     private const float MIN_VELOCITY_SQR = 0.01f;
@@ -15,6 +16,18 @@ public class BallManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
+        int iPlayers = GameSettings._iNbPlayers;
+        for( int i = 0; i < transform.childCount; i++ )
+        {
+            Debug.Log( ( iPlayers + i ) % iPlayers );
+            GameObject tBall = Instantiate( _tBallPrefab[ ( iPlayers + i ) % iPlayers ] );
+            tBall.transform.SetParent( transform.GetChild(i) );
+            tBall.transform.localPosition = new Vector3( 0f, 2f, 0f );
+        }
     }
 
     public void AddBall( Ball tBall )

@@ -29,17 +29,10 @@ public class CameraManager : MonoBehaviour
     public Vector2 _tAzimuthLimit;
     public float _fAzimuthSpeed;
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
-        int iCurrentPad = ( GameSettings._iNbGamepad == 1 ) ? 0 : iCurrentPlayer;
-
         GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
-        //GamePadState tPrevState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tPrevState;
 
         if (PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState == PlayerState.Play)
         {
