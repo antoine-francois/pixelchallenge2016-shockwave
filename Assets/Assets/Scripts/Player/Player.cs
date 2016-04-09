@@ -43,21 +43,7 @@ public class Player
         _iID = iId;
         _iScore = 0;
 
-        switch( _iID + 1 )
-        {
-            case 1:
-                _ePlayerIndex = PlayerIndex.One;
-                break;
-            case 2:
-                _ePlayerIndex = PlayerIndex.Two;
-                break;
-            case 3:
-                _ePlayerIndex = PlayerIndex.Three;
-                break;
-            case 4:
-                _ePlayerIndex = PlayerIndex.Four;
-                break;
-        }
+        _ePlayerIndex = (PlayerIndex)_iID;
     }
 
 
@@ -70,16 +56,19 @@ public class Player
             _tPrevState = _tState;
             _tState = tState;
         }
-        else if( GameSettings._iNbGamepad == 1 )
+#if UNITY_EDITOR
+        else
         {
             tState = GamePad.GetState( PlayerIndex.One );
             _tPrevState = _tState;
             _tState = tState;
         }
+#else
         else
         {
             Debug.LogError( "Pad " + _ePlayerIndex.ToString() + " not connected !" );
         }
+#endif
 
         if( _eState == PlayerState.Play )
         {        

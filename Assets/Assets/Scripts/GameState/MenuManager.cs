@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using XInputDotNetPure;
 
 public class MenuManager : MonoBehaviour
 {
@@ -19,10 +20,20 @@ public class MenuManager : MonoBehaviour
     public Text _tTimeOut;
     public Text _tCurrentPlayer;
 
+    [Header("Player Selection")]
+    public GameObject _tPlayerRoot;
+    public List<Text> _tPlayerInfo = new List<Text>();
+    private bool[] _bConnected = new bool[4];
+    private bool[] _bValidated = new bool[4];
+    private bool[] _bConfirmed = new bool[4];
+
+    private GamePadState[] _tPadState = new GamePadState[4];
+
     [Header("Menus Root")]
     public GameObject _tSplashRoot;
     public GameObject _tPressStartRoot;
     public GameObject _tMainMenuRoot;
+    public GameObject _tPlayerSelectionRoot;
     public GameObject _tCreditsRoot;
     public GameObject _tHUDRoot;
     public GameObject _tPauseRoot;
@@ -34,12 +45,77 @@ public class MenuManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        for( int i = 0; i < 4; i++ )
+        {
+            _bConnected[i] = false;
+            _bValidated[i] = false;
+            _bConfirmed[i] = false;
+        }
     }
 
     void Update()
     {
         if( Input.GetKeyDown( KeyCode.Escape ) ) {
             Back();
+        }
+
+        if( _tPlayerSelectionRoot.activeSelf )
+        {
+            int iConfirmed = 0;
+            int iValidated = 0;
+            int iPlayers = 0;
+
+            for( int i = 0; i < 4; i++ )
+            {
+                GamePadState tPrevState = _tPadState[i];
+                _tPadState[i] = GamePad.GetState( (PlayerIndex)i );
+#if UNITY_EDITOR
+                if( !_tPadState[i].IsConnected && GameSettings._iNbPlayers > i )
+                {
+                    _tPadState[i] = GamePad.GetState( PlayerIndex.One );
+                }
+#endif
+
+                if( _tPadState[i].IsConnected )
+                {
+                    iPlayers++;
+                    _bConnected[i] = true;
+                    if( _bValidated[i] )
+                    {
+                        iValidated++;
+                        if( _bConfirmed[i] )
+                        {
+                            iConfirmed++;
+                        }
+                        else if( Joystick.GetButtonDown( XInputKey.A, _tPadState[i], tPrevState ) )
+                        {
+                            _bConfirmed[i] = true;
+                            _tPlayerInfo[i].text = "READY !";
+                        }
+                    }
+                    else if( Joystick.GetButtonDown( XInputKey.A, _tPadState[i], tPrevState ) )
+                    {
+                        _bValidated[i] = true;
+                        _tPlayerInfo[i].text = "PRESS \"A\" WHEN ALL PLAYERS ARE READY";
+                    }
+                    else
+                    {
+                        _tPlayerInfo[i].text = "PRESS \"A\" TO PLAY";
+                    }
+                }
+                else
+                {
+                    _tPlayerInfo[i].text = "PAD DISCONNECTED";
+                    _bValidated[i] = false;
+                    _bConfirmed[i] = false;
+                }
+            }
+
+            if( iPlayers >= 2 && iConfirmed == iPlayers )
+            {
+                GameSettings._iNbPlayers = iPlayers;
+                LoadLevel( "MapScene" );
+            }
         }
     }
 
@@ -71,6 +147,14 @@ public class MenuManager : MonoBehaviour
         DisableAll();
         _tMainMenuRoot.SetActive(true);
         _PreviousMenu = GoToPressStart;
+    }
+
+
+    public void GoToPlayerSelection()
+    {
+        DisableAll();
+        _tPlayerSelectionRoot.SetActive( true );
+        _PreviousMenu = GoToMainMenu;
     }
 
     public void GoToCredits()
@@ -122,6 +206,7 @@ public class MenuManager : MonoBehaviour
         _tCreditsRoot.SetActive(false);
         _tHUDRoot.SetActive(false);
         _tPauseRoot.SetActive(false);
+        _tPlayerSelectionRoot.SetActive(false);
     }
 
     public void LoadLevel(string LevelName)
