@@ -8,18 +8,33 @@ ModelImporter:
     100000: //RootNode
     100002: polySurface64
     100004: polySurface65
+    100006: Floor
+    100008: Holes
+    100010: Wall
     400000: //RootNode
     400002: polySurface64
     400004: polySurface65
+    400006: Floor
+    400008: Holes
+    400010: Wall
     2300000: //RootNode
     2300002: polySurface64
     2300004: polySurface65
+    2300006: Floor
+    2300008: Holes
+    2300010: Wall
     3300000: //RootNode
     3300002: polySurface64
     3300004: polySurface65
+    3300006: Floor
+    3300008: Holes
+    3300010: Wall
     4300000: Map
     4300002: polySurface64
     4300004: polySurface65
+    4300006: Wall
+    4300008: Floor
+    4300010: Holes
   materials:
     importMaterials: 0
     materialName: 0
