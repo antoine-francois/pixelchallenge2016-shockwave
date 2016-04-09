@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iPlayer: 1
+  _tSparks: {fileID: 19840108, guid: 67a436a843be3e1458f12748d60811f9, type: 2}
 --- !u!135 &13501530
 SphereCollider:
   m_ObjectHideFlags: 1
