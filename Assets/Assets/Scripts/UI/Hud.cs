@@ -24,18 +24,20 @@ public class Hud : MonoBehaviour
 
     void Update()
     {
-        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
-        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
+        PlayerColor eCurrentPlayer = PlayerManager.Instance._eCurrentPlayer;
+        PlayerState eState = PlayerManager.Instance._tPlayers[eCurrentPlayer]._eState;
 
-        for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
-            _tScoreList[i].text =  string.Format( "P{0}\n{1}", i + 1, PlayerManager.Instance._tPlayers[i]._iScore );
+        for( int i = 0; i < GameSettings._iNbPlayers; i++ )
+        {
+            PlayerColor eColor = (PlayerColor)i;
+            _tScoreList[i].text =  string.Format( "{0}\n{1}", eColor.ToString(), PlayerManager.Instance._tPlayers[eColor]._iScore );
         }
 
         _tTimer.text = PlayerManager.Instance.GetChrono();
         _tTimeOut.gameObject.SetActive( eState == PlayerState.Timeout );
 
         _tCurrentPlayer.gameObject.SetActive( eState == PlayerState.Intro );
-        _tCurrentPlayer.text = "Player " + ( iCurrentPlayer + 1 );
+        _tCurrentPlayer.text = "Player " + eCurrentPlayer.ToString();
 
         if( Input.GetKeyDown( KeyCode.JoystickButton7 ) )
         {

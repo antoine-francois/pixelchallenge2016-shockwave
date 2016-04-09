@@ -7,10 +7,6 @@ public class CameraManager : MonoBehaviour
 {
     public Transform _tTarget;
     public Image _tMark;
-    public Color _tP1;
-    public Color _tP2;
-    public Color _tP3;
-    public Color _tP4;
 
     [Header("Move")]
     public float _fMoveSpeed;
@@ -33,30 +29,16 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        int iCurrentPlayer = PlayerManager.Instance._iCurrentPlayer;
+        PlayerColor eCurrentPlayer = PlayerManager.Instance._eCurrentPlayer;
 
-        PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
+        PlayerState eState = PlayerManager.Instance._tPlayers[eCurrentPlayer]._eState;
         if( eState == PlayerState.ChargeShockwave ) {
             return;
         }
 
-        switch( iCurrentPlayer )
-        {
-            case 0:
-                _tMark.color = _tP1;
-                break;
-            case 1:
-                _tMark.color = _tP2;
-                break;
-            case 2:
-                _tMark.color = _tP3;
-                break;
-            case 3:
-                _tMark.color = _tP4;
-                break;
-        }
+        _tMark.color = GameSettings.Instance._tPlayerColors[eCurrentPlayer];
 
-        GamePadState tState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._tState;
+        GamePadState tState = PlayerManager.Instance._tPlayers[eCurrentPlayer]._tState;
 
         bool bFirstShot = ( PlayerManager.Instance.TurnCount == 1 && eState == PlayerState.Play );
 

@@ -6,8 +6,6 @@ public class ForceField : GenericMechanism
     private Collider _tCollider;
     private MeshRenderer _tRenderer;
 
-    public List<Color> _tForceFieldColor = new List<Color>();
-
 	public override void Start()
     {
         base.Start();
@@ -24,8 +22,8 @@ public class ForceField : GenericMechanism
         _tCollider.enabled = true;
         _tRenderer.enabled = true;
 
-        gameObject.layer = LayerMask.NameToLayer( "P" + ( tBall._iPlayer + 1 ) );
-        GetComponentInChildren<MeshRenderer>().materials[0].color = _tForceFieldColor[tBall._iPlayer];
+        gameObject.layer = LayerMask.NameToLayer( "P" + tBall._ePlayer.ToString() );
+        GetComponentInChildren<MeshRenderer>().materials[0].color = GameSettings.Instance._tPlayerColors[tBall._ePlayer];
     }
 
     public override void Disable()

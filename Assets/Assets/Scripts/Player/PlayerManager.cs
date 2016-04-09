@@ -6,10 +6,10 @@ public class PlayerManager : MonoBehaviour
 {
     static public PlayerManager Instance { get; private set; }
 
-    public List<Player> _tPlayers = new List<Player>();
+    public Dictionary<PlayerColor, Player> _tPlayers = new Dictionary<PlayerColor, Player>();
 
     [HideInInspector]
-    public int _iCurrentPlayer = 0;
+    public PlayerColor _eCurrentPlayer = PlayerColor.Red;
 
     private float _fTimer = 0f;
     private float _fPlayTimer = 0f;
@@ -26,18 +26,20 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
 
         for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
-            _tPlayers.Add( new Player( i ) );
+            _tPlayers.Add( GameSettings.Instance._tColorOrder[i], new Player( i ) );
         }
+
+        StartCoroutine( _tPlayers[_eCurrentPlayer].ControllerVibration( 0.6f, 0.25f ) );
     }
 
     void Update()
     {
-        switch( _tPlayers[_iCurrentPlayer]._eState )
+        switch( _tPlayers[_eCurrentPlayer]._eState )
         {
             case PlayerState.Play:
                 _fPlayTimer += Time.deltaTime;
                 if( _fPlayTimer > MAX_TIME ) {
-                    _tPlayers[_iCurrentPlayer]._eState = PlayerState.Timeout;
+                    _tPlayers[_eCurrentPlayer]._eState = PlayerState.Timeout;
                 }
                 break;
 
@@ -53,27 +55,26 @@ public class PlayerManager : MonoBehaviour
                 if( _fTimer > INTRO_TIME )
                 {
                     _fTimer = 0f;
-                    _tPlayers[_iCurrentPlayer]._eState = PlayerState.Play;
+                    _tPlayers[_eCurrentPlayer]._eState = PlayerState.Play;
                 }
                 return;
         }
 
-        if( _tPlayers[_iCurrentPlayer].Update() ) {
+        if( _tPlayers[_eCurrentPlayer].Update() ) {
             NextPlayer();
         }
     }
 
     public void NextPlayer()
     {
+
         _fPlayTimer = 0f;
         _fTimer = 0f;
-        _iCurrentPlayer++;
+        _eCurrentPlayer = (PlayerColor)( _iTurnCount % GameSettings._iNbPlayers );
 
-        if( _iCurrentPlayer == GameSettings._iNbPlayers ) {
-            _iCurrentPlayer = 0;
-        }
+        StartCoroutine( _tPlayers[_eCurrentPlayer].ControllerVibration( 0.6f, 0.25f ) );
 
-        _tPlayers[_iCurrentPlayer]._eState = PlayerState.Intro;
+        _tPlayers[_eCurrentPlayer]._eState = PlayerState.Intro;
 
         _iTurnCount++;
         MechanismManager.Instance.NextTurn();

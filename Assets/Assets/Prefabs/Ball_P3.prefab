@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3846912f8d1c1464ba709695beccd738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iPlayer: 2
+  _ePlayer: 2
   _tSparks: {fileID: 19840108, guid: 67a436a843be3e1458f12748d60811f9, type: 2}
 --- !u!135 &13595076
 SphereCollider:

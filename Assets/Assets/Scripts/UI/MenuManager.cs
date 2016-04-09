@@ -24,6 +24,9 @@ public class MenuManager : MonoBehaviour
     private bool[] _bValidated = new bool[4];
     private bool[] _bConfirmed = new bool[4];
 
+    private bool _bSelectionFinalize = false;
+    private float _fSelectionTimer = 10f;
+
     private GamePadState[] _tPadState = new GamePadState[4];
 
     [Header("Menus Root")]
@@ -72,6 +75,16 @@ public class MenuManager : MonoBehaviour
         }
         else if( _tPlayerSelectionRoot.activeSelf )
         {
+
+            if( _bSelectionFinalize )
+            {
+                _fSelectionTimer -= Time.deltaTime;
+                if( _fSelectionTimer <= 0f ) {
+                    LoadLevel( "MapScene" );
+                }
+                return;
+            } 
+
             int iConfirmed = 0;
             int iValidated = 0;
             int iPlayers = 0;
@@ -124,8 +137,27 @@ public class MenuManager : MonoBehaviour
 
             if( iPlayers >= 2 && iConfirmed == iPlayers )
             {
+                _bSelectionFinalize = true;
                 GameSettings._iNbPlayers = iPlayers;
-                LoadLevel( "MapScene" );
+
+                List<PlayerColor> tAvailableColors = new List<PlayerColor>();
+                List<PlayerColor> tColors = new List<PlayerColor>();
+
+                for( int i = 0; i < iPlayers; i++ ) {
+                    tAvailableColors.Add( (PlayerColor)i );
+                }
+
+                for( int i = 0; i < iPlayers; i++ )
+                {
+                    int iColor = Random.Range( 0, tAvailableColors.Count );
+                    Debug.Log( iColor + " | " + tAvailableColors.Count ) ;
+                    tColors.Add( tAvailableColors[iColor] );
+                    tAvailableColors.RemoveAt( iColor );
+
+                    _tPlayerInfo[i].transform.parent.GetComponent<Image>().color = GameSettings.Instance._tPlayerColors[ tColors[i] ];
+                }
+
+                GameSettings.Instance._tColorOrder = tColors;
             }
         }
     }

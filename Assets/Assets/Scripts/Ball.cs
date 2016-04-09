@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Ball : MonoBehaviour
 {
-    public int _iPlayer = 0;
+    public PlayerColor _ePlayer;
 
     public Rigidbody _tRigidbody { get; private set; }
     public ParticleSystem _tSparks;
@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
         BallManager.Instance.RemoveBall( this );
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter( Collision collision )
     {
         foreach (ContactPoint contact in collision.contacts)
         {

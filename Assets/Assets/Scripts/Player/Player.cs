@@ -46,6 +46,14 @@ public class Player
         _ePlayerIndex = (PlayerIndex)_iID;
     }
 
+    public IEnumerator ControllerVibration( float fIntensity, float fDuration )
+    {
+        GamePad.SetVibration( _ePlayerIndex, fIntensity, fIntensity );
+
+        yield return new WaitForSeconds( fDuration );
+
+        GamePad.SetVibration( _ePlayerIndex, 0f, 0f );
+    }
 
     public bool Update()
     {
