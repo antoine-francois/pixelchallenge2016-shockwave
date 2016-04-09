@@ -22,7 +22,7 @@ public class ShockwaveFactory : MonoBehaviour
     {
         GameObject tWave = Instantiate(_tShockwavePrefab);
         tWave.transform.localPosition = new Vector3(_tTarget.position.x, _tTarget.position.y, _tTarget.position.z);
-        tWave.transform.localScale = new Vector3(fRadius, fRadius, fRadius);
+        tWave.GetComponent<Shockwave>()._fRadius = fRadius;
 
         tWave.GetComponent<Shockwave>()._fPower = fPower;
 
