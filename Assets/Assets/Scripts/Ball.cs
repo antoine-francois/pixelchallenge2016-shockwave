@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
         _tRigidbody = GetComponent<Rigidbody>();
         _tRoll = GetComponent<AudioSource>();
         _tRoll.pitch = Random.Range(.7f, 1.3f);
+        _tRoll.Play();
 	}
 
 	void Update()
