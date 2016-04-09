@@ -21,7 +21,6 @@ public class MenuManager : MonoBehaviour
     public Text _tCurrentPlayer;
 
     [Header("Player Selection")]
-    public GameObject _tPlayerRoot;
     public List<Text> _tPlayerInfo = new List<Text>();
     private bool[] _bConnected = new bool[4];
     private bool[] _bValidated = new bool[4];
