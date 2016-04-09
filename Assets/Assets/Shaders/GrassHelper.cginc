@@ -7,6 +7,7 @@
 sampler2D _MainTex;
 float4 _MainTex_ST;
 float _Length;
+fixed4 _LightColor0;
 
 struct vertInput
 {
@@ -56,7 +57,7 @@ float4 frag ( fragInput i ) : COLOR
 {
 	float4 o = tex2D(_MainTex, i.uv_y.xy);
 	fixed atten = LIGHT_ATTENUATION(i);
-	o.rgb *= max( CURRENT_MULTIPLIER * atten, .2f );
+	o.rgb *= max( CURRENT_MULTIPLIER * atten, .2f ) * _LightColor0 .rgb;
 	UNITY_APPLY_FOG(i.fogCoord, o);
 
 	return o;
