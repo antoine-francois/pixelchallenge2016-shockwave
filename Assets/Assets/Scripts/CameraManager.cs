@@ -8,6 +8,10 @@ public class CameraManager : MonoBehaviour
     public Transform _tTarget;
     public Image _tMark;
 
+    private bool _bPhotoMode = false;
+    private Vector3 _tSavePos;
+    private Quaternion _tSaveRot;
+
     [Header("Move")]
     public float _fMoveSpeed;
 
@@ -75,5 +79,24 @@ public class CameraManager : MonoBehaviour
         this.transform.localPosition = new Vector3(x, y, z);
 
         this.transform.LookAt(_tTarget != null ? _tTarget.position : Vector3.zero, Vector3.up);
+    }
+
+
+    public void TogglePhotoMode()
+    {
+        _bPhotoMode = !_bPhotoMode;
+
+        if( _bPhotoMode )
+        {
+            Time.timeScale = 0f;
+            _tSavePos = _tTarget.position;
+            _tSaveRot = _tTarget.rotation;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            _tTarget.position = _tSavePos;
+            _tTarget.rotation = _tSaveRot;
+        }
     }
 }

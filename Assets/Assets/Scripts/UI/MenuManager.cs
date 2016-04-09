@@ -127,7 +127,6 @@ public class MenuManager : MonoBehaviour
                 for( int i = 0; i < iPlayers; i++ )
                 {
                     int iColor = Random.Range( 0, tAvailableColors.Count );
-                    Debug.Log( iColor + " | " + tAvailableColors.Count ) ;
                     tColors.Add( tAvailableColors[iColor] );
                     tAvailableColors.RemoveAt( iColor );
 

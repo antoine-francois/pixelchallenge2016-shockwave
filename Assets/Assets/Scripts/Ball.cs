@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
     {
         if (transform.position.y < _fRollSoundLimit)
         {
-            _tRoll.volume = _tRigidbody.velocity.magnitude / 10.0f;
+            _tRoll.volume = _tRigidbody.velocity.magnitude / 5.0f;
         }
         else
             _tRoll.volume = 0.0f;
