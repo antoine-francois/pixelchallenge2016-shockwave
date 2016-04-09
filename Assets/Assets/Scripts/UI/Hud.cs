@@ -28,7 +28,7 @@ public class Hud : MonoBehaviour
         PlayerState eState = PlayerManager.Instance._tPlayers[iCurrentPlayer]._eState;
 
         for( int i = 0; i < GameSettings._iNbPlayers; i++ ) {
-            _tScoreList[i].text =  string.Format( "P{0}\n{1}", i + 1, PlayerManager.Instance._tPlayers[i]._iScore );
+            _tScoreList[i].text = PlayerManager.Instance._tPlayers[i]._iScore.ToString();
         }
 
         _tTimer.text = PlayerManager.Instance.GetChrono();

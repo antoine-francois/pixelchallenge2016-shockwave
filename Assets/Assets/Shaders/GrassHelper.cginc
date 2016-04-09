@@ -20,6 +20,7 @@ struct fragInput
 	float4 pos : SV_POSITION;
 	float3 uv_y : TEXCOORD0;
 	LIGHTING_COORDS(1,2)
+	UNITY_FOG_COORDS(3)
 };
 
 fragInput vert( vertInput i )
@@ -46,6 +47,7 @@ fragInput vert( vertInput i )
 	o.uv_y = float3( uvs, wPos.y );
 
 	TRANSFER_VERTEX_TO_FRAGMENT(o);
+	UNITY_TRANSFER_FOG(o,o.pos);
 
 	return o;
 }
@@ -53,7 +55,9 @@ fragInput vert( vertInput i )
 float4 frag ( fragInput i ) : COLOR
 {
 	float4 o = tex2D(_MainTex, i.uv_y.xy);
-	o.rgb *= max( CURRENT_MULTIPLIER * LIGHT_ATTENUATION(i), .2f );
+	fixed atten = LIGHT_ATTENUATION(i);
+	o.rgb *= max( CURRENT_MULTIPLIER * atten, .2f );
+	UNITY_APPLY_FOG(i.fogCoord, o);
 
 	return o;
 }
