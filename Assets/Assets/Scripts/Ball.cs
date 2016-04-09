@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Ball : MonoBehaviour
@@ -27,7 +28,6 @@ public class Ball : MonoBehaviour
         if (transform.position.y < _fRollSoundLimit)
         {
             _tRoll.volume = _tRigidbody.velocity.magnitude / 10.0f;
-            Debug.Log( _tRigidbody.velocity.magnitude / 10.0f );
         }
         else
             _tRoll.volume = 0.0f;
@@ -41,6 +41,17 @@ public class Ball : MonoBehaviour
     void OnDestroy()
     {
         BallManager.Instance.RemoveBall( this );
+
+        int iScore = PlayerManager.Instance._tPlayers[_ePlayer].SetScore( _ePlayer );
+
+        if( iScore == BallManager.Instance._iNbBalls / GameSettings._iNbPlayers )
+        {
+            EndLevel._iTurnCount = PlayerManager.Instance.TurnCount;
+            EndLevel._eWinner = _ePlayer;
+
+            SceneManager.LoadScene( "EndLevel" );
+            return;
+        }
     }
 
     void OnCollisionEnter( Collision collision )

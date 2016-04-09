@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
+using System.Linq;
 
 
 public enum PlayerState
@@ -118,9 +119,9 @@ public class Player
         return false;
     }
 
-    public int IncrementScore()
+    public int SetScore( PlayerColor eColor )
     {
-        _iScore++;
+        _iScore = BallManager.Instance.GetScore( eColor );
         return _iScore;
     }
 }
