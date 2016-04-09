@@ -70,7 +70,12 @@ public class CameraManager : MonoBehaviour
         forward.y = 0.0f;
         forward.Normalize();
 
-        _tTarget.Translate( (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime, Space.World );
+        Vector3 tMovement = (right * fMoveX + forward * fMoveY) * _fMoveSpeed * Time.deltaTime;
+        _tTarget.Translate( tMovement, Space.World );
+
+        if( !Physics.Raycast( transform.parent.position, Vector3.down, ( 1 << LayerMask.NameToLayer( "Floor" ) ) ) ) {
+            _tTarget.Translate( - tMovement, Space.World );
+        }
 
         float fTurnX = ( eState != PlayerState.Intro && !bFirstShot ) ? Joystick.GetAxis( XInputKey.RStickX, tState ) * _fAzimuthSpeed * Time.deltaTime : 0f;
 
