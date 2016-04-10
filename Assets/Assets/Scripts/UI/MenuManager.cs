@@ -12,6 +12,8 @@ public class MenuManager : MonoBehaviour
 
     [Header("Player Selection")]
     public List<Text> _tPlayerInfo = new List<Text>();
+    public Text _tSelectionTimer;
+
     private bool[] _bConnected = new bool[4];
     private bool[] _bValidated = new bool[4];
     private bool[] _bConfirmed = new bool[4];
@@ -52,10 +54,11 @@ public class MenuManager : MonoBehaviour
 
         if( _tPlayerSelectionRoot.activeSelf )
         {
-
             if( _bSelectionFinalize )
             {
                 _fSelectionTimer -= Time.deltaTime;
+                _tSelectionTimer.text = Mathf.Ceil( _fSelectionTimer ).ToString();
+
                 if( _fSelectionTimer <= 0f ) {
                     LoadLevel( "MapScene" );
                 }
@@ -134,6 +137,7 @@ public class MenuManager : MonoBehaviour
                 }
 
                 GameSettings.Instance._tColorOrder = tColors;
+                _tSelectionTimer.gameObject.SetActive( true );
             }
         }
     }
@@ -150,6 +154,7 @@ public class MenuManager : MonoBehaviour
     {
         DisableAll();
         _tPlayerSelectionRoot.SetActive( true );
+        _tSelectionTimer.gameObject.SetActive( false );
         _PreviousMenu = GoToMainMenu;
     }
 
