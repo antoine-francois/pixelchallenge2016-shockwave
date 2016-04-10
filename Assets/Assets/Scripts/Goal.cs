@@ -15,6 +15,8 @@ public class Goal : MonoBehaviour
             _tSystem.Play();
 
             StartCoroutine( PlayerManager.Instance._tPlayers[ tCollider.GetComponent<Ball>()._ePlayer ].ControllerVibration( 0.8f, 0.1f ) );
+
+            GetComponent<AudioSource>().Play();
         }
     }
 }

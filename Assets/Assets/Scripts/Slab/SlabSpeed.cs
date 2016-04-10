@@ -10,5 +10,6 @@ public class SlabSpeed : Slab
     {
         base.Activate( tBall );
         tBall._tRigidbody.velocity += transform.forward * _fMultiplicator;
+        GetComponent<AudioSource>().Play();
     }
 }
