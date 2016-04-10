@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ShockIntersect: {fileID: 2322462}
   _ShockDistort: {fileID: 2380350}
+  _WaveDistort: {fileID: 2371160}
   _fPower: 3.38
   _fRadius: 0
 --- !u!135 &13522152
